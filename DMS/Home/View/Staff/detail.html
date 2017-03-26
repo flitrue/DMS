@@ -1,0 +1,265 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="noprint">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+                </li>
+
+                <li id="breadcrumb" class="active">{$Think.lang.LOOKSTAFF}</li>
+            </ul><!-- .breadcrumb -->
+
+           <!-- <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+                </form>
+            </div>-->
+            <!-- #nav-search -->
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="page-header noprint">
+            <h1>
+                {$Think.lang.STAFFMAG}
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    {$Think.lang.LOOK}
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="btn-toolbar noprint">
+
+                    <div class="btn-group">
+                        <button class="btn btn-pink"  onclick="checkpower();window.location.href='{:U(\'staff/edit\')}&uid={$arr[0].id}'" title="编辑"><i class="icon-edit icon-2x icon-only"></i></button>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-danger" onclick="checkpower();bootbox.confirm('你确定要删除吗?', function (result) {
+												if (result) {
+													location.href='{:U(\'staff/del\')}&uid={$arr[0].id}';
+												}
+												});" title="删除"><i class="icon-trash icon-2x icon-only"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-warning" title="打印" onclick="printinfo();"><i class="icon-print icon-2x icon-only"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <a href="JavaScript:history.back(-1)" class="btn btn-info" title="返回"><i class="icon-reply icon-2x icon-only"></i></a>
+                    </div>
+
+                </div>
+                <div class="space-8"></div>
+                <h3>员工详细信息</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>状态</th>
+                            <th>性别</th>
+                            <th>生日</th>
+                            <th>身份证号</th>
+                            <th>手机号</th>
+                            <th>Email</th>
+                            <th>微信</th>
+                            <th>QQ</th>
+                            <th>入职时间</th>
+                            <th>部门</th>
+                            <th>小组</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{$arr[0].name}</td>
+                            <td>{$arr[0].status}</td>
+                            <td>{$arr[0].sex}</td>
+                            <td>{$arr[0].brith}</td>
+                            <td>{$arr[0].idcard}</td>
+                            <td>{$arr[0].phone}</td>
+                            <td><a href="{:U('staff/writeemail')}&uid={$arr[0].id}" title="发送邮件">{$arr[0].email}</a></td>
+                            <td>{$arr[0].weixin}</td>
+                            <td>{$arr[0].qq}</td>
+                            <td>{$arr[0].time}</td>
+                            <td>{$arr[0].depart}</td>
+                            <td>{$arr[0].group}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="space-2"></div>
+                <h3>员工使用设备</h3>
+                <div class="table-responsive">
+                    <table id="devicedetail" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>设备号</th>
+                            <th>型号</th>
+                            <th>序列号</th>
+                            <th>标签</th>
+                            <th>类型</th>
+                            <th>价格</th>
+                            <th>关键信息</th>
+                            <th>领用日期</th>
+                            <th>状态</th>
+                            <th>备注</th>
+                            <th>部门</th>
+                            <th>小组</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <volist name="arr1" id="vol">
+                                <tr>
+                                    <td><a href="{:U('device/detail')}&did={$vol.did}" title="查看设备详情">{$vol.devicename}</a></td>
+                                    <td>{$vol.version}</td>
+                                    <td>{$vol.code}</td>
+                                    <td>{$vol.tag}</td>
+                                    <td>{$vol.category}</td>
+                                    <td>{$vol.price}</td>
+                                    <td>{$vol.keyinfo}</td>
+                                    <td>{$vol.usetime}</td>
+                                    <td>{$vol.status}</td>
+                                    <td>{$vol.remarks}</td>
+                                    <td>{$vol.departname}</td>
+                                    <td>{$vol.groupname}</td>
+                                </tr>
+                            </volist>
+
+                        </tbody>
+                    </table>
+                    <div class="message-footer clearfix">
+                        <div class="pull-left"> 总共 {$count} 条记录 </div>
+
+                        <div class="pull-right">
+
+                          <span class="form-group">
+                              总价值:<b id="price" style="color: red;"></b>
+                          </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<include file="Public:scripts"/>
+<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+<script src="{$Think.const.JS_URL}jquery.colorbox-min.js"></script>
+<script>
+    jQuery(function($) {
+
+        $('#photo').find('input[type=file]').ace_file_input({
+            style:'well',
+            btn_choose:'Change photo',
+            btn_change:null,
+            no_icon:'icon-picture',
+            thumbnail:'large',
+            droppable:true,
+            before_change: function(files) {
+                var file = files[0];
+                if(typeof file === "string") {
+                    //files is just a file name here (in browsers that don't support FileReader API)
+                    if(! (/\.(jpe?g|png|gif)$/i).test(file) ) return false;
+                } else{
+                    //file is a File object
+                    var type = $.trim(file.type);
+                    if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
+                            || ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )//for android default browser!
+                    ) return false;
+
+                    if( file.size > 110000 ) {
+                        //~100Kb
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }).end().find('button[type=reset]').on(ace.click_event, function(){
+            $('#photo input[type=file]').ace_file_input('reset_input');
+        }).end().find('.date-picker').datepicker().next().on(ace.click_event, function(){
+            $(this).prev().focus();
+        });
+
+        $('[data-rel="popover"]').popover({container:'body'});//上传显示
+
+
+        var colorbox_params = {
+            reposition:true,
+            scalePhotos:true,
+            scrolling:false,
+            previous:'<i class="icon-arrow-left"></i>',
+            next:'<i class="icon-arrow-right"></i>',
+            close:'&times;',
+            current:'{current} of {total}',
+            maxWidth:'100%',
+            maxHeight:'100%',
+            onOpen:function(){
+                document.body.style.overflow = 'hidden';
+            },
+            onClosed:function(){
+                document.body.style.overflow = 'auto';
+            },
+            onComplete:function(){
+                $.colorbox.resize();
+            }
+        };
+        $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+        $("#cboxLoadingGraphic").append("<i class='icon-spinner orange'></i>");
+
+    });
+
+    // 打印
+    function printinfo(){
+        alert("表格较长，请选择横向布局打印");
+        $(".main-content").css('margin-left',0);
+        $("a").removeAttr('href');
+
+        window.print();
+        window.location.reload();
+
+    }
+
+    // 计算设备的总价格
+    function price(){
+        var table = $("#devicedetail");
+        var price = 0;
+        for(var i=0; i< table.length;i++) {
+            var tr = table[i].rows;
+
+            for(var j=1; j< tr.length;j++){
+                var td = tr[j];
+                price += parseFloat(td.cells[5].innerHTML);
+            }
+        }
+        return price;
+    }
+     var price = price();
+    $("#price").html(price);
+</script>
+
+<include file="Public:footer"/>

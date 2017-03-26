@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{$Think.lang.APP_NAME}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Page-Enter" content="revealTrans(duration=10, transition=8)">
+    <meta http-equiv="Page-Exit" content="revealTrans(duration=10, transition=20)">
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="bookmark" href="/favicon.ico"/>
+    <!-- basic styles -->
+    <link href="{$Think.const.CSS_URL}bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}font-awesome.min.css" />
+
+    <!--[if IE 7]-->
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}font-awesome-ie7.min.css" />
+    <!--[endif]-->
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}bootstrapValidator.min.css" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}colorbox.css" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}dropzone.css" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}croppic.css" />
+
+
+    <!--fonts-->
+    <style>
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Open Sans Light'), local('OpenSans-Light'), url({$Think.const.ASSETS_URL}font/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Open Sans'), local('OpenSans'), url({$Think.const.ASSETS_URL}font/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+        }
+
+    </style>
+    <!-- 打印 -->
+    <style>
+        @media print {
+            .noprint {
+                display: none;
+            }
+        }
+
+    </style>
+    <!-- 相册 相片提示信息-->
+    <style>
+        .copy-tips{position:fixed;z-index:999;bottom:50%;left:50%;margin:0 0 -20px -80px;background-color:rgba(0, 0, 0, 0.2);filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#30000000, endColorstr=#30000000);padding:6px;}
+        .copy-tips-wrap{padding:10px 20px;text-align:center;border:1px solid #F4D9A6;background-color:#FFFDEE;font-size:14px;}
+
+        #preimg:hover{
+            border: solid 2px lightgrey;
+            cursor: pointer;
+        }
+    </style>
+
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}jquery-ui-1.10.3.full.min.css" />
+    <!-- ace styles -->
+    <link rel="stylesheet" href="{$Think.const.MYCSS_URL}style.css"/>
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ace.min.css"/>
+
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ace-rtl.min.css"/>
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ace-skins.min.css"/>
+
+    <!--[if lte IE 8]-->
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ace-ie.min.css" />
+    <!--[endif]-->
+
+    <!-- inline styles related to this page -->
+    <style>
+        .table th, .table td {
+            text-align: center;
+        }
+        .huandeng{
+            width: 90%;
+            height: auto;
+        }
+    </style>
+    <!-- ace settings handler -->
+
+    <script src="{$Think.const.JS_URL}ace-extra.min.js"></script>
+
+    <!-- 大搜索框样式 -->
+    <style>
+
+        body,
+        input {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .searchcontainer { margin: 4px auto 40px auto; width: 800px; text-align: center; }
+
+        #searchinput{
+            font-size: 13px;
+            min-height: 32px;
+            margin: 0;
+            padding: 7px 8px;
+            outline: none;
+            color: #333;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            background-position: right center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            transition: all 0.15s ease-in;
+            -webkit-transition: all 0.15s ease-in 0;
+            vertical-align: middle;
+        }
+        .searchbutton {
+            position: relative;
+            display: inline-block;
+            margin: 0;
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+            white-space: nowrap;
+            background-color: #eaeaea;
+            background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+            background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+            background-image: linear-gradient(#fafafa, #eaeaea);
+            background-repeat: repeat-x;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+            border-bottom-color: #c5c5c5;
+            box-shadow: 0 1px 3px rgba(0,0,0,.05);
+            vertical-align: middle;
+            cursor: pointer;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+        }
+        .searchbutton:hover,
+        .searchbutton:active {
+            background-position: 0 -15px;
+            border-color: #ccc #ccc #b5b5b5;
+        }
+        .searchbutton:active {
+            background-color: #dadada;
+            border-color: #b5b5b5;
+            background-image: none;
+            box-shadow: inset 0 3px 5px rgba(0,0,0,.15);
+        }
+        .searchbutton:focus,
+        #searchinput:focus {
+            outline: none;
+            border-color: #51a7e8;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,.075), 0 0 5px rgba(81,167,232,.5);
+        }
+
+
+        #search label {
+            font-weight: 200;
+            padding: 5px 0;
+        }
+        #search input[type=text] {
+            font-size: 18px;
+            width: 605px;
+        }
+        #search .searchbutton {
+            padding: 10px;
+            width: 90px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<div class="navbar navbar-default noprint" id="navbar">
+    <script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="/" class="navbar-brand">
+                <small>
+                    <img src="/favicon.ico" width="25px" height="25px"/>
+                    {$Think.lang.APP_NAME}
+                </small>
+            </a><!-- /.brand -->
+        </div><!-- /.navbar-header -->
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+
+                <!--<li class="green">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="icon-envelope icon-animated-vertical"></i>
+                        <span class="badge badge-success">5</span>
+                    </a>
+
+                    <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                        <li class="dropdown-header">
+                            <i class="icon-envelope-alt"></i>
+                            5条消息
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <img src="{$Think.const.ASSETS_URL}avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                <span class="msg-body">
+											<span class="msg-title">
+												<span class="blue">王平平:</span>
+												嗨 ...
+											</span>
+
+											<span class="msg-time">
+												<i class="icon-time"></i>
+												<span>1分钟以前</span>
+											</span>
+										</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <img src="{$Think.const.ASSETS_URL}avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                <span class="msg-body">
+											<span class="msg-title">
+												<span class="blue">吴威:</span>
+												不知道...
+											</span>
+
+											<span class="msg-time">
+												<i class="icon-time"></i>
+												<span>20分钟以前</span>
+											</span>
+										</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <img src="{$Think.const.ASSETS_URL}avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                <span class="msg-body">
+											<span class="msg-title">
+												<span class="blue">许小平:</span>
+												什么鬼 ...
+											</span>
+
+											<span class="msg-time">
+												<i class="icon-time"></i>
+												<span>下午3:15</span>
+											</span>
+										</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="inbox.html">
+                                查看所有消息
+                                <i class="icon-arrow-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>-->
+
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="{$Think.const._ROOT}{$Think.cookie.dms_avatar}" onerror="javascript:this.src='{$Think.const.ASSETS_URL}images/avatar.png'" alt="avatar"/>
+                        <span class="user-info">
+									<small>{$Think.lang.WELCOME},</small>
+									{$Think.cookie.dms_name}
+								</span>
+
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li class="needhidden" >
+                            <a href="{:U('index/setting')}">
+                                <i class="icon-cog"></i>
+                                {$Think.lang.SETTING}
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{:U('index/profile')}">
+                                <i class="icon-user"></i>
+                                {$Think.lang.PROFILE}
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="{:U('login/exitsys')}">
+                                <i class="icon-off"></i>
+                                {$Think.lang.EXIT}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul><!-- /.ace-nav -->
+        </div><!-- /.navbar-header -->
+    </div><!-- /.container -->
+</div>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>

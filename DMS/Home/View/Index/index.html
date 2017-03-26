@@ -1,0 +1,294 @@
+﻿<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+			try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+		</script>
+
+		<ul class="breadcrumb">
+			<li class="active">
+				<i class="icon-home home-icon"></i>
+				{$Think.lang.Home}
+			</li>
+		</ul><!-- .breadcrumb -->
+
+		<!--<div class="nav-search" id="nav-search">
+			<form class="form-search">
+				<span class="input-icon">
+					<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+					<i class="icon-search nav-search-icon"></i>
+				</span>
+			</form>
+		</div>-->
+		<!-- #nav-search -->
+	</div>
+	<div class="page-content">
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+
+				<div class="alert alert-block alert-success col-xs-10">
+					<button onclick="hiddenalert();" type="button" class="close" data-dismiss="alert">
+						<i class="icon-remove"></i>
+					</button>
+
+					<i class="icon-ok green"></i>
+
+					欢迎使用
+					<strong>
+						{:L('APP_NAME')}!
+					</strong>
+					{$lastlogintime}
+				</div>
+
+				<div class="row">
+
+					<div class="col-sm-12">
+
+						<div class="col-sm-12 text-center" id="slidr-box">
+							<div id="slidr-ul" style="margin: auto;">
+
+								<div data-slidr="one" class="huandeng-box">
+									<img class="huandeng" src="{$Think.const.IMAGE_UPLOADURL}{$img[0].url1}">
+								</div>
+
+								<div data-slidr="two" class="huandeng-box">
+									<img class="huandeng" src="{$Think.const.IMAGE_UPLOADURL}{$img[0].url2}">
+								</div>
+
+								<div data-slidr="three" class="huandeng-box">
+									<img class="huandeng" src="{$Think.const.IMAGE_UPLOADURL}{$img[0].url3}">
+								</div>
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="widget-box transparent" id="recent-box">
+									<div class="widget-header">
+										<h4 class="lighter smaller">
+											<i class="icon-rss orange"></i>
+											最近
+										</h4>
+
+										<div class="widget-toolbar no-border">
+											<ul class="nav nav-tabs" id="recent-tab">
+												<li class="active">
+													<a data-toggle="tab" href="#member-tab">员工</a>
+												</li>
+												<li>
+													<a data-toggle="tab" href="#device-tab">设备</a>
+												</li>
+
+												<!--<li>
+													<a data-toggle="tab" href="#patent-tab">专利</a>
+												</li>-->
+											</ul>
+										</div>
+									</div>
+
+									<div class="widget-body">
+										<div class="widget-main padding-4">
+											<div class="tab-content padding-8 overflow-visible">
+												<div id="member-tab" class="tab-pane active">
+													<volist name="memberlate" id="vol">
+														<div class="itemdiv memberdiv">
+															<div class="user">
+																<img src="{$vol.avatar}" onerror="javascript:this.src='{$Think.const.ASSETS_URL}images/avatar.png'" alt="">
+															</div>
+															<div class="body">
+																<div class="name">
+																	<a href="{:U('staff/detail')}&uid={$vol.id}">{$vol.name}</a>
+																</div>
+																<div class="time">
+																	<i class="icon-time">{$vol.time|strtotime|date='m月d日',###}</i>
+																	<span class="green"></span>
+																</div>
+															</div>
+														</div>
+													</volist>
+												</div>
+												<div id="device-tab" class="tab-pane">
+													<ul class="item-list">
+														<volist name="devicelate" id="vol">
+															<li class="item-orange chearfix">
+																<label class="inline">
+																	<span><a href="{:U('device/detail')}&did={$vol.id}">{$vol.name}</a></span>
+																</label>
+																<div class="pull-right">
+																	<span>{$vol.buytime}</span>
+																</div>
+															</li>
+														</volist>
+													</ul>
+												</div>
+
+												<div id="patent-tab" class="tab-pane">
+													<ul class="item-list">
+														<volist name="patentlate" id="vol">
+															<li class="item-orange chearfix">
+																<label class="inline">
+																	<span>{$vol.name}</span>
+																</label>
+															</li>
+														</volist>
+													</ul>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-6">
+								<div class="widget-box transparent">
+									<div class="widget-header widget-header-flat">
+										<h4 class="lighter">
+											<i class="icon-signal"></i>
+											员工人数统计
+										</h4>
+									</div>
+									<div class="widget-body">
+										<div class="widget-main no-padding">
+											<div class="dialogs">
+												<div class="itemdiv dialogdiv">
+													<div id="usernumchart" style="height: 300px;">
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div><!-- /span -->
+				</div><!-- /row -->
+
+
+			</div><!-- /.main-container-inner -->
+
+
+		</div><!-- /.main-container -->
+
+	</div>
+</div>
+</div>
+</div>
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="{$Think.const.JS_URL}jquery-2.0.3.min.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="{$Think.const.JS_URL}jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+
+<script type="text/javascript">
+	if("ontouchend" in document) document.write("<script src='{$Think.const.JS_URL}jquery.mobile.custom.min.js'>"+"<"+"script>");
+</script>
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<script src="{$Think.const.JS_URL}jquery-ui-1.10.3.custom.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.ui.touch-punch.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.slimscroll.min.js"></script>
+
+<script src="{$Think.const.JS_URL}echarts.min.js"></script>
+
+
+
+<!-- ace scripts -->
+
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+<script src="{$Think.const.JS_URL}slidr.min.js"></script>
+<include file="Public:check"/>
+
+<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+	slidr.create('slidr-ul', {
+		transition:"fade",
+		keyboard: true,
+		controls: 'border',
+		theme: '#000',
+		pause: true,
+		overfloaw: true,
+		touch: true
+	}).add("h",["one","two","three","one"]).auto(3E3,"left");
+
+	var usernumchart = echarts.init(document.getElementById('usernumchart'));
+	var str = '{$depart}';
+	var depart = eval(str);
+	var membernum = eval('{$menbernum}');
+
+	usernumchart.setOption(option = {
+
+		tooltip: {
+			trigger: 'axis'
+		},
+
+		toolbox: {
+			show: true,
+			feature: {
+				mark: {show: true},
+				dataView: {show: true, readOnly: false},
+				magicType: {show: true, type: ['line', 'bar']},
+				restore: {show: true},
+				saveAsImage: {show: true}
+			}
+		},
+		calculable: true,
+		xAxis: [
+			{
+				type: 'category',
+				data: depart
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				splitNumber:1
+			}
+		],
+		series: [
+			{
+				name: '人数',
+				type: 'bar',
+				data: membernum
+			}
+		]
+	});
+
+	var bool = "{$Think.cookie.dms_bool}";
+	if(bool){
+		$(".alert").hide();
+	}
+	function hiddenalert() {
+		$.ajax({
+			url: "{:U('index/del_cookie')}",
+			success: function(){
+			}
+		});
+	}
+
+	$(".huandeng-box").width($('#slidr-box').width());
+	$(".huandeng").width($('#slidr-box').width()* 0.95);
+
+</script>
+<include file="Public:footer"/>

@@ -1,0 +1,451 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="noprint">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb noprint">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="{:U('index/index')}">{:L('HOME')}</a>
+                </li>
+
+                <li class="active">查看文档</li>
+            </ul><!-- .breadcrumb -->
+
+            <!--<div class="nav-search noprint" id="nav-search">
+                <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="icon-search nav-search-icon"></i>
+                    </span>
+                </form>
+            </div>-->
+            <!-- #nav-search -->
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="btn-toolbar noprint">
+                            <div class="btn-group">
+                                <button class="btn btn-success needhidden" onclick="window.location.href='{:U(\'document/add\')}'" title="添加文档"><i class="icon-plus-sign icon-2x icon-only"></i></button>
+                            </div>
+                            <div class="btn-group needhidden">
+                                <button class="btn btn-danger" id="deleteselected" title="删除所选内容"><i class="icon-trash icon-2x icon-only"></i></button>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-warning" title="打印所选内容" onclick="printinfo();"><i class="icon-print icon-2x icon-only"></i></button>
+                            </div>
+                            <div class="searchcontainer">
+                                <div id="search">
+                                    <input id="searchinput" type="text" name="bigsearch">
+                                    <button class="searchbutton" onclick="bigsearchinfo('document');">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-2"></div>
+                       <div class="searchinfo">
+
+                           <div class="col-xs-12">
+                               <div class="col-xs-6">
+                                   <div class="widget-box transparent">
+                                       <div class="widget-header widget-header-flat">
+                                           <h4 class="lighter">
+
+                                               文档类型统计
+                                           </h4>
+
+                                           <div class="widget-toolbar">
+                                               <a href="#" data-action="collapse">
+                                                   <i class="icon-chevron-up"></i>
+                                               </a>
+                                           </div>
+                                       </div>
+
+                                       <div class="widget-body">
+                                           <div class="widget-main no-padding">
+                                               <div id="document_chart_pie" style="height:200px;"></div>
+                                           </div><!-- /widget-main -->
+                                       </div><!-- /widget-body -->
+                                   </div><!-- /widget-box -->
+                               </div>
+
+                              <div class="col-xs-6">
+                                   <div class="widget-box transparent">
+                                       <div class="widget-header widget-header-flat">
+                                           <h4 class="lighter">
+
+                                               文档上传情况
+                                           </h4>
+
+                                           <div class="widget-toolbar">
+                                               <a href="#" data-action="collapse">
+                                                   <i class="icon-chevron-up"></i>
+                                               </a>
+                                           </div>
+                                       </div>
+
+                                       <div class="widget-body">
+                                           <div class="widget-main no-padding">
+                                               <div id="document_chart_bar" style="height:200px;"></div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+
+                           </div>
+                           <div class="space-8"></div>
+                           <div class="table-responsive">
+                               <form id="select"  method="post" enctype="multipart/form-data" action="">
+                                   <table id="sample-table-1" class="table table-striped table-bordered table-hover sortable">
+                                       <thead>
+                                       <tr style="text-align: center">
+                                           <th class="noprint sorttable_nosort">
+                                               <label>
+                                                   <input type="checkbox" class="ace" />
+                                                   <span class="lbl"></span>
+                                               </label>
+                                           </th>
+                                           <th>文档名</th>
+                                           <th>{:L('CATEGORY')}</th>
+                                           <th>大小</th>
+                                           <th>上传人</th>
+                                           <th>上传时间</th>
+                                           <th class="noprint">操作</th>
+                                       </tr>
+                                       </thead>
+                                       <tbody>
+
+                                       <volist name="arr" id="vol" key="k" empty="没有数据">
+
+                                           <tr>
+                                               <td class="noprint sorttable_nosort">
+                                                   <label>
+                                                       <input type="checkbox" name="{$vol.name}" value="{$vol.id}" class="ace" />
+                                                       <span class="lbl"></span>
+                                                   </label>
+                                               </td>
+
+                                               <td><nobr><a href="{:U('document/detail')}&id={$vol.id}">{$vol.name}</a></nobr></td>
+                                               <td><nobr><span class="documentcategory label label-lg">{$vol.category}</span></nobr></td>
+                                               <td>{$vol['size']/1024|round=2}KB</td>
+                                               <td><a href="{:U('staff/detail')}&uid={$vol.uid}">{$vol.username}</a></td>
+                                               <td><nobr>{$vol.uploadtime}</nobr></td>
+                                               <td class="noprint">
+                                                   <nobr>
+                                                       <div>
+                                                           <a class="btn btn-purple btn-xs" onclick="downloaddocumentinfo('{$vol.id}')" title="下载">
+                                                               <i class="icon-download-alt bigger-120"></i>
+                                                           </a>
+
+                                                           <a onclick="editdocumentinfo('{$vol.id}')" class="btn btn-xs btn-info needhidden" title="编辑">
+                                                               <i class="icon-edit bigger-120"></i>
+                                                           </a>
+                                                           <a class="btn btn-info btn-xs btn-danger bootbox-confirm needhidden" onclick="checkpower();deldocumentinfo('{$vol.id}')" title="删除">
+                                                               <i class="icon-trash bigger-120"></i>
+                                                           </a>
+
+                                                           <a class="btn btn-xs btn-warning" onclick="detaildocumentinfo('{$vol.id}')" title="查看详细信息">
+                                                               <i class="icon-eye-open bigger-120"></i>
+                                                           </a>
+                                                       </div>
+                                                   </nobr>
+                                               </td>
+                                           </tr>
+
+                                       </volist>
+                                       </tbody>
+                                   </table>
+                               </form>
+                               <div class="message-footer clearfix noprint">
+                                   <div class="pull-left"> 总共 {$count} 条记录 </div>
+
+                                   <div class="pull-right">
+                                       <div class="inline middle">  共{$num}页 </div>
+
+                                       <ul class="pagination middle">
+
+                                           <li>
+                                               <a href="{:U('document/look')}&page={$prepage}">
+                                                   <i class="icon-caret-left bigger-140 middle"></i>
+                                               </a>
+                                           </li>
+
+                                           <li>
+                                               <form id="page" action="" method="post" class="inline">
+                                                    <span class="form-group">
+                                                        <input id="pageinput" value="{$pagenow}" maxlength="3" type="text" name="page" onkeydown='if(event.keyCode==13){gosubmit();}'/>
+                                                    </span>
+                                               </form>
+                                           </li>
+
+                                           <li class="pull-right">
+                                               <a href="{:U('document/look')}&page={$nextpage}">
+                                                   <i class="icon-caret-right bigger-140 middle"></i>
+                                               </a>
+                                           </li>
+
+                                       </ul>
+                                   </div>
+                               </div>
+                           </div><!-- /.table-responsive -->
+                       </div>
+                    </div><!-- /span -->
+                </div><!-- /row -->
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<include file="Public:scripts"/>
+<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+<script>
+    jQuery(function(){
+
+        // 监听搜索后div内容变化时重新加载js代码
+        $(".searchinfo").bind('DOMNodeInserted', function(e) {
+            checkcategory();
+        });
+
+        $('table th input:checkbox').on('click' , function(){
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+                    .each(function(){
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
+
+        });
+
+        $('#page').bootstrapValidator({
+            message: '请输入有效的值',
+            feedbackIcons: {
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                page: {
+                    message: '页数不足',
+                    validators: {
+                        between: {
+                            min: 1,
+                            max: "{$num}",
+                            message: '页数在1~{$num}之间'
+                        }
+                    }
+                }
+            }
+        });
+
+        $('#deleteselected').click(function(){
+            checkpower();
+            showdialogs();
+        });
+
+        function showdialogs(){
+            if($('input:checked').length > 0){
+                bootbox.confirm('你确定要删除选中的内容吗?', function (result) {
+                    if (result) {
+                        var data = $('#select').serialize();
+                        $.ajax({
+                            url: "{:U('document/deletemulti')}",
+                            type: 'post',
+                            data: data,
+                            success: function (res) {
+                                console.log(res);
+                                if(res == 1 ){
+                                    bootbox.alert({
+                                        buttons: {
+                                            ok: {
+                                                label: 'OK',
+                                                className: 'btn-default'
+                                            }
+                                        },
+                                        message: '文档被删除了',
+                                        title: "删除成功",
+                                        callback: function (){
+                                            window.location.reload();
+                                        }
+                                    });
+
+                                }else{
+                                    bootbox.alert({
+                                        buttons: {
+                                            ok: {
+                                                label: 'OK',
+                                                className: 'btn-default'
+                                            }
+                                        },
+                                        message: '主人，你还是爱我的☺',
+                                        title: "删除失败",
+                                        callback: function (){
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+        var document_chart_pie = echarts.init(document.getElementById('document_chart_pie'));
+        var document_chart_pie_data = '{$document_chart_pie}';
+        var document_chart_pie_category_data = '{$document_chart_pie_category}';
+        option1 = {
+            color: [
+                '#D6487E','#82AF6F','#3A87AD'
+            ],
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient : 'vertical',
+                x : 'left',
+                data: eval(document_chart_pie_category_data)
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {
+                        show: true,
+                        type: ['pie', 'funnel'],
+                        option: {
+                            funnel: {
+                                x: '25%',
+                                width: '50%',
+                                funnelAlign: 'left',
+                                max: 1548
+                            }
+                        }
+                    },
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            series : [
+                {
+                    name:'员工状态统计',
+                    type:'pie',
+                    radius : '60%',
+                    center: ['50%', '40%'],
+                    data: eval(document_chart_pie_data)
+                }
+            ]
+        };
+        document_chart_pie.setOption(option1);
+
+        var document_chart_bar = echarts.init(document.getElementById('document_chart_bar'));
+        var document_chart_bar_data = '{$document_chart_bar_data}';
+        var document_chart_bar_categroy_data = '{$document_chart_bar_category_data}';
+
+        var option2 = {
+
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    data :eval(document_chart_bar_categroy_data)
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : eval(document_chart_bar_data)
+        };
+
+        document_chart_bar.setOption(option2);
+    });
+
+    function gosubmit(){
+        var page = $('#pageinput').val();
+        window.location.href="{:U('document/look')}&page="+page;
+    }
+
+    // 打印
+    function printinfo(){
+
+        $(".main-content").css('margin-left',0);
+        $("a").removeAttr('href');
+
+        window.print();
+        window.location.reload();
+
+    }
+
+    function downloaddocumentinfo(id){
+        location.href="{:U('document/download')}&id="+id;
+    }
+
+    function detaildocumentinfo(id){
+        location.href="{:U('document/detail')}&id="+id;
+    }
+
+    function deldocumentinfo(id){
+        bootbox.confirm('你确定要删除吗?', function (result) {
+            if (result) {
+                location.href="{:U('document/del')}&id="+id;
+            }
+        });
+    }
+
+    function editdocumentinfo(id){
+        location.href="{:U('document/edit')}&id="+id;
+    }
+
+</script>
+
+<script>
+    function checkcategory() {
+        $(".documentcategory").each(function(){
+            if($(this).text() == "技术文档"){
+                $(this).addClass("label-info");
+            }else if($(this).text() == "专利文档"){
+                $(this).addClass("label-pink");
+            }else if($(this).text() == "使用手册"){
+                $(this).addClass("label-success");
+            }else{
+                $(this).addClass("label-danger");
+            }
+        });
+    }
+</script>
+<include file="Public:footer"/>

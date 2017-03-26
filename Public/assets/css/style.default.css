@@ -1,0 +1,53 @@
+
+
+
+/***** 3. COLUMN STYLE *****/
+/***************************/
+
+
+.one_half,.one_third,.two_third,.three_fourth,.one_fourth,.one_fifth,
+.two_fifth,.three_fifth,.four_fifth,.one_sixth,.five_sixth{ position:relative; margin-right:2%; float:left; }
+
+/*.last{ margin-right:0 !important; clear:right; }*/
+
+
+/***** 35. PRODUCT LIST STYLES *****/
+/***********************************/
+
+
+
+.prodhead_menu { list-style: none; position: relative; }
+.prodhead_menu li { display: inline-block; float: left; }
+.prodhead_menu li a {
+	padding: 4px 10px 5px 10px; border: 1px solid #ccc; display: block; -moz-border-radius: 2px; -webkit-border-radius: 2px;
+	border-radius: 2px; font-weight: bold; -moz-box-shadow: inset 0 1px 0 #fff; -webkit-box-shadow: inset 0 1px 0 #fff;
+	box-shadow: inset 0 1px 0 #fff; background-color: #fff;
+}
+.prodhead_menu li a:hover { background-color: #eee; border-color: #bbb; cursor: pointer; }
+.prodhead_menu li a.prev, .prodhead_menu li a.next {
+	display: block; padding: 15px; border: 1px solid #ccc; cursor: pointer; background-color: #fff;
+}
+.prodhead_menu li a.prev:hover, .prodhead_menu li a.next:hover { background-color: #eee; border-color: #bbb; }
+
+.prodhead_menu li a.prev_disabled { background-position: 10px -46px; cursor: default; }
+.prodhead_menu li a.prev_disabled:hover { border-color: #ccc; background-color: #fff; }
+
+.prodhead_menu li a.next_disabled { background-position: -39px -46px; cursor: default; }
+.prodhead_menu li a.next_disabled:hover { border-color: #ccc; background-color: #fff; }
+.prodhead_menu li.right { float: right; }
+.prodhead_menu li .pagenuminfo { margin-top: 5px; display: inline-block; }
+
+.prodlist { list-style: none; margin: 20px; }
+.prodlist li {
+	display: inline-block; position: relative; color: #eee; cursor: pointer; text-shadow: 1px 1px rgba(0,0,0,0.3); margin-bottom: 2%; }
+.prodlist li a { color: #FB9337; }
+.prodlist li .thumb { padding: 5px; border: 1px solid #ddd; }
+.prodlist li .thumb img { width: 225px; }
+.prodlist li .content { position: absolute; top: 5px; left: 5px; width: 225px; height: 163px; overflow: hidden; }
+.prodlist li .contentinner { background: url(../images/bluetrans.png); padding: 5px 7px; margin-top: 132px; height: 163px; }
+.prodlist li .title { color: #fff; font-family: 'RobotoCondensed',Arial,Helvetica,sans-serif; font-size: 13px; }
+.prodlist li .title:hover { color: #FB9337; }
+.prodlist li .price { color: #fff; font-weight: bold; float: right; }
+.prodlist li .by { font-size: 11px; font-style: italic; }
+.prodlist li .desc { font-size: 11px; margin: 5px 0; line-height: 16px; }
+

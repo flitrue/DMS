@@ -1,0 +1,257 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="noprint">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+                </li>
+
+                <li id="breadcrumb" class="active">{$Think.lang.LOOKDETAIL}</li>
+            </ul><!-- .breadcrumb -->
+
+            <!--<div class="nav-search" id="nav-search">
+                <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+                </form>
+            </div>-->
+            <!-- #nav-search -->
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="page-header noprint">
+            <h1>
+                {$Think.lang.DEVICEMAG}
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    {$Think.lang.LOOK}
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="btn-toolbar noprint">
+
+                    <div class="btn-group">
+                        <button class="btn btn-pink"  onclick="checkpower();window.location.href='{:U(\'device/edit\')}&did={$arr[0].did}'" title="编辑"><i class="icon-edit icon-2x icon-only"></i></button>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-danger" onclick="checkpower();bootbox.confirm('你确定要删除吗?', function (result) {
+												if (result) {
+													location.href='{:U(\'device/del\')}&did={$arr[0].did}&id={$arr[0].id}';
+												}
+												});" title="删除"><i class="icon-trash icon-2x icon-only"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-warning" title="打印所选内容" onclick="printinfo();"><i class="icon-print icon-2x icon-only"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <a href="JavaScript:history.back(-1)" class="btn btn-info" id="" title="返回"><i class="icon-reply icon-2x icon-only"></i></a>
+                    </div>
+
+                </div>
+                <div class="space-2"></div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>设备号</th>
+                            <th>型号</th>
+                            <th>序列号</th>
+                            <th>标签</th>
+                            <th>类型</th>
+                            <th>价格</th>
+                            <th>关键信息</th>
+                            <th>购买人</th>
+                            <th>购买日期</th>
+                            <th>领用人</th>
+                            <th>领用日期</th>
+                            <th>状态</th>
+                            <th>备注</th>
+                            <th>部门</th>
+                            <th>小组</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{$arr[0].devicename}</td>
+                            <td>{$arr[0].version}</td>
+                            <td>{$arr[0].code}</td>
+                            <td>{$arr[0].tag}</td>
+                            <td>{$arr[0].category}</td>
+                            <td>{$arr[0].price}</td>
+                            <td>{$arr[0].keyinfo}</td>
+                            <td>{$arr[0].buyer}</td>
+                            <td>{$arr[0].buytime}</td>
+                            <td><a href="{:U('staff/detail')}&uid={$arr[0].uid}">{$arr[0].username}</a></td>
+                            <td>{$arr[0].usetime}</td>
+                            <td>{$arr[0].status}</td>
+                            <td>{$arr[0].remarks}</td>
+                            <td>{$arr[0].departname}</td>
+                            <td>{$arr[0].groupname}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-group col-xs-12" >
+
+                        <div class="row-fluid">
+                            <ul class="ace-thumbnails">
+                                <li>
+                                    <a href="{$photo1}" data-rel="colorbox">
+                                        <img alt="150x150" src="{$photo1}" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" height="150px" width="150px"/>
+                                        <div class="text">
+                                            <div class="inner">{$arr[0].devicename}</div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{$photo2}" data-rel="colorbox">
+                                        <img alt="150x150" src="{$photo2}" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" height="150px" width="150px"/>
+                                        <div class="text">
+                                            <div class="inner">{$arr[0].devicename}</div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{$photo3}" data-rel="colorbox">
+                                        <img alt="150x150" src="{$photo3}" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" height="150px" width="150px"/>
+                                        <div class="text">
+                                            <div class="inner">{$arr[0].devicename}</div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{$invoice1}" data-rel="colorbox">
+                                        <img alt="150x150" src="{$invoice1}" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" height="150px" width="150px"/>
+                                        <div class="text">
+                                            <div class="inner">{$arr[0].devicename}的发票</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{$invoice2}" data-rel="colorbox">
+                                        <img alt="150x150" src="{$invoice2}" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" height="150px" width="150px"/>
+                                        <div class="text">
+                                            <div class="inner">{$arr[0].devicename}的发票</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<include file="Public:scripts"/>
+<include file="Public:check"/>
+
+<!-- inline scripts related to this page -->
+<script src="{$Think.const.JS_URL}jquery.colorbox-min.js"></script>
+<script>
+    jQuery(function($) {
+
+        $('#photo').find('input[type=file]').ace_file_input({
+            style:'well',
+            btn_choose:'Change photo',
+            btn_change:null,
+            no_icon:'icon-picture',
+            thumbnail:'large',
+            droppable:true,
+            before_change: function(files) {
+                var file = files[0];
+                if(typeof file === "string") {
+                    //files is just a file name here (in browsers that don't support FileReader API)
+                    if(! (/\.(jpe?g|png|gif)$/i).test(file) ) return false;
+                } else{
+                    //file is a File object
+                    var type = $.trim(file.type);
+                    if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
+                            || ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )//for android default browser!
+                    ) return false;
+
+                    if( file.size > 110000 ) {
+                        //~100Kb
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }).end().find('button[type=reset]').on(ace.click_event, function(){
+            $('#photo input[type=file]').ace_file_input('reset_input');
+        }).end().find('.date-picker').datepicker().next().on(ace.click_event, function(){
+            $(this).prev().focus();
+        });
+
+
+        $('[data-rel="popover"]').popover({container:'body'});//上传显示
+
+
+        var colorbox_params = {
+            reposition:true,
+            scalePhotos:true,
+            scrolling:false,
+            previous:'<i class="icon-arrow-left"></i>',
+            next:'<i class="icon-arrow-right"></i>',
+            close:'&times;',
+            current:'{current} of {total}',
+            maxWidth:'100%',
+            maxHeight:'100%',
+            onOpen:function(){
+                document.body.style.overflow = 'hidden';
+            },
+            onClosed:function(){
+                document.body.style.overflow = 'auto';
+            },
+            onComplete:function(){
+                $.colorbox.resize();
+            }
+        };
+        $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+        $("#cboxLoadingGraphic").append("<i class='icon-spinner orange'></i>");
+    });
+
+    // 打印
+    function printinfo(){
+        alert("表格较长，请选择横向布局打印");
+        $(".main-content").css('margin-left',0);
+        $("a").removeAttr('href');
+
+        window.print();
+        window.location.reload();
+
+    }
+</script>
+
+<include file="Public:footer"/>

@@ -1,0 +1,578 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+		</script>
+
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home home-icon"></i>
+				<a href="/">{$Think.lang.HOME}</a>
+			</li>
+			<li class="active">{$Think.lang.PROFILE}</li>
+		</ul><!-- .breadcrumb -->
+
+		<!--<div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div>-->
+		<!-- #nav-search -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				{$Think.lang.PROFILE}
+				<small>
+					<i class="icon-double-angle-right"></i>
+					{$Think.lang.LOOK}
+				</small>
+			</h1>
+		</div><!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<div>
+					<div id="user-profile-3" class="user-profile row">
+						<div class="col-sm-offset-1 col-sm-10">
+							<div class="well well-sm">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+
+								<div class="inline middle blue bigger-110"> 你的资料完成了{$progess}%... </div>
+								<div style="width:200px;" data-percent="{$progess}%" class="inline middle no-margin progress progress-striped active">
+									<div class="progress-bar progress-bar-success" style="width:{$progess}%"></div>
+								</div>
+							</div><!-- /well -->
+
+							<div class="space"></div>
+
+
+							<div class="tabbable">
+								<ul class="nav nav-tabs padding-16">
+									<li class="active">
+										<a data-toggle="tab" href="#edit-basic">
+											<i class="green icon-edit bigger-125"></i>
+											{:L('BASICINFO')}
+										</a>
+									</li>
+
+									<li>
+										<a data-toggle="tab" href="#edit-settings">
+											<i class="purple icon-key bigger-125"></i>
+											重置密码
+										</a>
+									</li>
+								</ul>
+
+								<div class="tab-content profile-edit-tab-content">
+
+									<div id="edit-basic" class="tab-pane  in active">
+										<form id="form1" class="form-horizontal" enctype="multipart/form-data" method="post">
+											<h4 class="header blue bolder smaller">{:L('GENERAL')}</h4>
+
+											<div class="row text-center">
+												<div id="preimg"  style="width:150px;height: 155px;display: inline-block">
+													<img class="img-circle" src="{$arr[0].avatar}" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" width="150px" height="150px" onclick="show();" />
+												</div>
+												<div id="upoadimg" class="col-xs-6 col-sm-3 col-md-2">
+
+													<input type="file" name="avatar"/>
+												</div>
+
+											</div>
+
+											<div class="form-group col-md-6">
+												<label class="col-sm-3 control-label no-padding-right" >{:L('NAME')}</label>
+
+												<div class="col-sm-9">
+																	<span class="input-icon input-icon-right">
+																		<input class="input" name="name" type="text" value="{$arr[0].name}"/>
+																		<i class="icon-user"></i>
+																	</span>
+												</div>
+											</div>
+
+
+											<div class="form-group col-md-6">
+												<label class="col-sm-3 control-label no-padding-right" >出生日期</label>
+
+												<div class="col-sm-9">
+																	<span class="input-icon input-icon-right">
+																		<input class="datepicker" name="brith" type="text" data-date-format="yyyy-mm-dd"  readonly="readonly" value="{$arr[0].brith}"/>
+																		<i class="icon-calendar"></i>
+																	</span>
+												</div>
+											</div>
+
+
+											<div class="form-group col-md-6">
+												<label class="col-sm-3 control-label no-padding-right">{:L('GENDER')}</label>
+
+												<div class="col-sm-9">
+													<label class="inline">
+														<input type="radio" name="sex" value="男" class="ace"/>
+														<span class="lbl"> {:L('MALE')}</span>
+													</label>
+
+
+													<label class="inline">
+														<input type="radio" name="sex" value="女" class="ace" />
+														<span class="lbl"> {:L('FEMALE')}</span>
+													</label>
+												</div>
+											</div>
+
+
+											<div class="form-group col-md-6">
+												<label class="col-sm-3 control-label no-padding-right" for="form-field-comment">{$Think.lang.COMMENT}</label>
+
+												<div class="col-sm-9">
+													<textarea id="form-field-comment" name="comment">{$arr[0].comment}</textarea>
+												</div>
+											</div>
+											<br>
+											<h4 class="header blue bolder smaller col-xs-12 col-md-12">{$Think.lang.CONTACT}</h4>
+											<br>
+											<!--<div class="form-group">
+                                                <label class="col-md-3 control-label no-padding-right" for="email">Email</label>
+
+                                                <span style="margin-left: 1%">
+                                                    <input type="text" id="email" name="email"/>@
+                                                    <select name="domain" id="domain">
+                                                        <volist name="domain" id="vol">
+                                                            <option value="{/*$vol.name /*}">{/*$vol.name /*}</option>
+                                                        </volist>
+                                                    </select>
+                                                </span>
+                                            </div>-->
+
+
+											<div class="form-group col-md-6">
+												<label class="col-sm-3 control-label no-padding-right" >{$Think.lang.PHONE}</label>
+
+												<div class="col-sm-9">
+																	<span class="input-icon input-icon-right">
+																		<input class="input" name="phone" type="text" value="{$arr[0].phone}"/>
+																		<i class="icon-phone icon-flip-horizontal"></i>
+																	</span>
+												</div>
+											</div>
+
+
+											<div class="form-group col-md-6">
+												<label class="col-sm-3 control-label no-padding-right" >微信</label>
+
+												<div class="col-sm-9">
+																	<span class="input-icon input-icon-right">
+																		<input class="input" name="weixin" type="text" value="{$arr[0].weixin}"/>
+																		<i class="icon-comments icon-flip-horizontal"></i>
+																	</span>
+												</div>
+											</div>
+
+											<div class="form-group col-md-6">
+												<label class="col-sm-3 control-label no-padding-right" >{$Think.lang.QQ}</label>
+
+												<div class="col-sm-9">
+																	<span class="input-icon input-icon-right">
+																		<input class="input" name="qq" type="text" value="{$arr[0].qq}"/>
+																		<img class="icon-flip-horizontal" src="{$Think.const.IMAGE_URL}sqq.png" title="qq"/>
+																	</span>
+												</div>
+											</div>
+
+											<div class="clearfix">
+												<div class="col-md-offset-3 col-md-9">
+													<button id="submitbtn" class="btn btn-info" type="button">
+														<i class="icon-ok bigger-110"></i>
+														{:L('SAVE')}
+													</button>
+
+													&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<button class="btn" type="reset">
+														<i class="icon-undo bigger-110"></i>
+														{:L('RESET')}
+													</button>
+												</div>
+											</div>
+										</form>
+									</div>
+
+									<div id="edit-settings" class="tab-pane">
+										<div class="space-10"></div>
+
+										<form id="changepassword" >
+											<div class="form-group">
+												<p>密码长度为6~16个字符，支持数字和大小写字母，不支持标点符号和空格</p>
+												<label class="inline">
+													<span class="lbl text-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 密码</span>
+													<input type="password" name="password">
+												</label>
+											</div>
+
+											<div class="space-8"></div>
+
+											<div class="form-group">
+												<label class="inline">
+													<span class="lbl"> 确认密码</span>
+													<input type="password" name="repassword">
+
+												</label>
+											</div>
+											<div class="space-8"></div>
+											<div>
+												<label class="inline">
+													<span class="lbl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+													<button class="btn" onclick="changepassword();">确定</button>
+												</label>
+											</div>
+										</form>
+
+										<div class="space-8"></div>
+
+									</div>
+
+								</div>
+							</div>
+
+						</div><!-- /span -->
+					</div><!-- /user-profile -->
+				</div>
+
+				<!-- PAGE CONTENT ENDS -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+	<i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="{$Think.const.JS_URL}jquery-2.0.3.min.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="{$Think.const.JS_URL}jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='{$Think.const.JS_URL}jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+	window.jQuery || document.write("<script src='{$Think.const.JS_URL}jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='{$Think.const.JS_URL}jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!--[if lte IE 8]>
+<script src="{$Think.const.JS_URL}excanvas.min.js"></script>
+<![endif]-->
+
+<script src="{$Think.const.JS_URL}jquery-ui-1.10.3.custom.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.ui.touch-punch.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.gritter.min.js"></script>
+<script src="{$Think.const.JS_URL}bootbox.min.js"></script>
+
+<script src="{$Think.const.JS_URL}select2.min.js"></script>
+
+<script src="{$Think.const.JS_URL}bootstrapValidator.min.js"></script>
+
+<script src="{$Think.const.JS_URL}jquery-ui-1.10.3.full.min.js"></script>
+<!-- ace scripts -->
+
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+
+<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+
+    jQuery(function($) {
+        $(".datepicker").datepicker({
+            changeYear: true,
+            defaultDate: "1992-05-11",
+            maxDate: "2000-12-31",
+            minDate: "1949-10-01",
+            showMonthAfterYear:true,
+            changeMonth: true,
+            monthNamesShort: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+            dateFormat: "yy-mm-dd"
+        });
+
+        ///////////////////////////////////////////
+        $('#user-profile-3').find('input[type=file]').ace_file_input({
+            style:'well',
+            btn_choose:'修改头像',
+            btn_change:null,
+            no_icon:'icon-picture',
+            thumbnail:'large',
+            droppable:true,
+            before_change: function(files, dropped) {
+                var file = files[0];
+
+                if(typeof file === "string") {
+                    //files is just a file name here (in browsers that don't support FileReader API)
+                    if(! (/\.(jpe?g|png|gif)$/i).test(file) ) return false;
+                }else{
+                    var type = $.trim(file.type);
+                    if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
+                        || ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )
+                    //for android default browser!
+                    ) return false;
+
+                    if( file.size > 5000000 ) {
+                        //~100Kb
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }).end().find('button[type=reset]').on(ace.click_event, function(){
+
+        });
+
+        var sex = "{$arr[0].sex}";
+        if(sex == "女"){
+            $("input[value=女]").attr("checked",true);
+        }else{
+            $("input[value=男]").attr("checked",true);
+        }
+
+        var avatar = "{$Think.cookie.dms_avatar}";
+        if(avatar){
+            $("preimg").show();
+            $("#upoadimg").hide();
+        }else{
+            $("preimg").hide();
+            $("#upoadimg").hide();
+        }
+    });
+    function show() {
+
+        $("#preimg").hide();
+        $("#upoadimg").show();
+
+    }
+
+    $("#submitbtn").on("click",function () {
+
+        var data = new FormData(document.getElementById('form1'));
+        $.ajax({
+            url: "{:U('index/updateProfile')}&uid={$arr[0].id}",
+            type: 'post',
+            dataType: "json", // 必须的
+            processData:false, // 必须的
+            contentType:false,
+            data: data,
+            success: function (res) {
+                if(eval(res).code){
+                    alert("更新成功");
+                    window.location.reload();
+                }else{
+                    alert("更新失败");
+                }
+
+            }
+        });
+
+    });
+    $("#form1").bootstrapValidator({
+        message: '请输入有效的值',
+		/*feedbackIcons: {
+		 valid: 'glyphicon glyphicon-ok',
+		 invalid: 'glyphicon glyphicon-remove',
+		 validating: 'glyphicon glyphicon-refresh'
+		 },*/
+        fields: {
+            name: {
+                message: '姓名无效',
+                validators: {
+                    notEmpty: {
+                        message: '姓名不能为空'
+                    },
+                    stringLength: {
+                        min: 2,
+                        max: 8,
+                        message: '姓名的长度为2~8'
+                    }
+                }
+            },
+            birth: {
+                message: '生日无效',
+                validators: {
+                    notEmpty: {
+                        message: '生日不能为空'
+                    }
+                }
+            },
+            qq: {
+                validators: {
+                    regexp: {
+                        regexp: /^[0-9]{5,12}$/,
+                        message: "QQ号格式不正确"
+                    }
+                }
+            },
+            phone: {
+                message: '手机号无效',
+                validators: {
+                    notEmpty: {
+                        message: '手机号不能为空'
+                    },
+                    regexp: {
+                        regexp: /^1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}$/,
+                        message: "手机号格式不正确"
+                    }
+                }
+            },
+            comment: {
+                message: '无效',
+                validators: {
+                    stringLength: {
+                        max: 50,
+                        message: '姓名的长度为50'
+                    }
+                }
+            }
+        }
+    });
+
+    $("#changepassword").bootstrapValidator({
+        message: '请输入有效的值',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            password: {
+                message: '密码无效',
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 16,
+                        message: '密码的长度为6~16'
+                    },
+                    identical: {
+                        field: 'repassword', //需要进行比较的input name值
+                        message: '两次密码不一致'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9]{6,16}$/,
+                        message: "密码格式不正确"
+                    }
+                }
+            },
+            repassword: {
+                message: '确认密码无效',
+                validators: {
+                    notEmpty: {
+                        message: '确认密码不能为空'
+                    },
+                    stringLength: {
+                        min:6,
+                        max: 16,
+                        message: '确认密码的长度为6~16'
+                    },
+                    identical: {
+                        field: 'password', //需要进行比较的input name值
+                        message: '两次密码不一致'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9]{6,16}$/,
+                        message: "密码格式不正确"
+                    }
+                }
+            }
+        }
+    });
+    function changepassword(){
+        var bootstrapValidator = $("#changepassword").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if(bootstrapValidator.isValid()){
+            bootbox.confirm('你确定要提交吗?', function (result) {
+                if (result) {
+                    var data = $("#changepassword").serialize();
+                    $.ajax({
+                        url: "{:U('index/changepassword')}&id={$arr[0].id}",
+                        type: "post",
+                        data: data,
+                        dataType: "json",
+                        success: function(res){
+                            console.log(res);
+                            showdialogs(res);
+                        }
+                    });
+                }
+            });
+        }
+    }
+    function showdialogs(res){
+        if(eval(res).code == '200' ){
+            bootbox.alert({
+                buttons: {
+                    ok: {
+                        label: 'OK',
+                        className: 'btn-default'
+                    }
+                },
+                message: '密码修改成功',
+                title: "提交成功",
+                callback: function(){
+                    window.location.href="{:U('index/profile')}";
+                }
+            });
+        }else{
+            bootbox.alert({
+                buttons: {
+                    ok: {
+                        label: 'OK',
+                        className: 'btn-default'
+                    }
+                },
+                message: '密码修改失败',
+                title: "提交失败了",
+                callback: function(){
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+</script>
+
+<include file="Public:footer"/>

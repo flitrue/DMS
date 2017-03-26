@@ -1,0 +1,142 @@
+		<include file="Public:header"/>
+		<include file="Public:lefter"/>
+		<include file="Public:setting"/>
+
+
+		<div class="main-content">
+			<div class="breadcrumbs" id="breadcrumbs">
+				<script type="text/javascript">
+					try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+				</script>
+
+				<ul class="breadcrumb">
+					<li>
+						<i class="icon-home home-icon"></i>
+						<a href="/">{$Think.lang.HOME}</a>
+					</li>
+
+					<li class="active"><a href="{:U('album/gallery')}">媒体管理</a></li>
+				</ul><!-- .breadcrumb -->
+
+				<!--<div class="nav-search" id="nav-search">
+					<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+					</form>
+				</div>-->
+				<!-- #nav-search -->
+			</div>
+
+			<div class="page-content">
+				<div class="page-header">
+					<h1>
+						相册
+						<small>
+							<i class="icon-double-angle-right"></i>
+							上传相片
+						</small>
+					</h1>
+				</div><!-- /.page-header -->
+
+				<div class="row">
+					<div class="col-xs-12">
+						<!-- PAGE CONTENT BEGINS -->
+
+						<div class="alert alert-info">
+							<i class="icon-hand-right"></i>
+
+							请拖拽图片到下方区域或点击下方区域上传图片.
+							<button class="close" data-dismiss="alert">
+								<i class="icon-remove"></i>
+							</button>
+						</div>
+
+						<div id="dropzone">
+							<form id="uploadForm" action="{:U('album/upload_save')}&aid={$aid}" class="dropzone" method="post" enctype="multipart/form-data">
+								<div class="fallback">
+									<input name="file" type="file" />
+								</div>
+							</form>
+
+						</div><!-- PAGE CONTENT ENDS -->
+						<label id="daojishi" hidden><span class="time"></span>秒后跳转到相册详情<a href="{:U('album/photo')}&aid={$aid}"><b>返回</b></a></label>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.page-content -->
+		</div><!-- /.main-content -->
+
+	</div><!-- /.main-container-inner -->
+
+
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+	window.jQuery || document.write("<script src='{$Think.const.JS_URL}jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+
+
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<script src="{$Think.const.JS_URL}dropzone.min.js"></script>
+
+<!-- ace scripts -->
+
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+		<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+	jQuery(function($){
+
+		try {
+			$(".dropzone").dropzone({
+				paramName: "file", // The name that will be used to transfer the file
+				maxFilesize: 0.5, // MB
+				uploadMultiple: true,
+				//addRemoveLinks : true,
+				dictDefaultMessage :
+						'<span class="bigger-150 bolder"><i class="icon-caret-right red"></i> 上传文件</span>  \
+                         <br /> \
+                        <i class="upload-icon icon-cloud-upload blue icon-3x"></i>'
+				,
+				dictResponseError: '上传文件时发生错误!',
+
+				//change the previewTemplate to use Bootstrap progress bars
+				previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"progress progress-small progress-striped active\"><div class=\"progress-bar progress-bar-success\" data-dz-uploadprogress></div></div>\n  <div class=\"dz-success-mark\"><span></span></div>\n  <div class=\"dz-error-mark\"><span></span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>",
+				init: function() {
+					this.on("success", function() {
+						$("#daojishi").show();
+						var i = 5;
+						$(".time").html(i);
+						setInterval(function(){
+							i--;
+							$(".time").html(i);
+						},1000);
+						setTimeout(function(){
+							window.location.href="{:U('album/photo')}&aid={$aid}"
+						},5000);
+					});
+				}
+			});
+		} catch(e) {
+			alert('你的浏览器太老了,请更换!');
+		}
+
+	});
+</script>
+
+<include file="Public:footer"/>

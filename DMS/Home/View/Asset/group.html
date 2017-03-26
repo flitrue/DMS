@@ -1,0 +1,505 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+            </li>
+
+            <li class="active">{:L('GROUPASSET')}</li>
+        </ul><!-- .breadcrumb -->
+
+        <!--<div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div>-->
+        <!-- #nav-search -->
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                {:L('GROUPASSET')}
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    {:L('LOOK')}
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="col-sm-1"></div>
+
+                <div class="echarts-layout">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-1">
+
+
+
+                                    <p>
+                                        <button class="btn-warning" onclick="show_box('aa-box');">
+                                            技术部
+                                        </button>
+                                    </p>
+                                    <p>
+                                        <button class="btn-grey" onclick="show_box('bb-box');">
+                                            行政部
+                                        </button>
+                                    </p>
+                                    <p>
+                                        <button class="btn-warning" onclick="show_box('cc-box');">
+                                            管理部
+                                        </button>
+                                    </p>
+                                    <p>
+                                        <button class="btn-grey" onclick="show_box('dd-box');">
+                                            财务部
+                                        </button>
+                                    </p>
+                                </div>
+
+                                <div class="col-sm-11">
+
+                                    <div id="aa-box" class="echarts-box widget-box visible no-border">
+
+                                        <div class="col-sm-8">
+                                            <div class="widget-header widget-header-flat">
+                                                <h4 class="lighter">
+                                                    <i class="icon-star orange"></i>
+                                                    技术价目表
+                                                </h4>
+
+                                                <div class="widget-toolbar">
+                                                    <i class="icon-chevron-up"></i>
+                                                </div>
+                                            </div>
+                                            <table class="table table-bordered table-striped">
+                                                <thead class="thin-border-bottom">
+                                                <tr>
+                                                    <th>
+                                                        <i class="icon-caret-right blue"></i>
+                                                        小组名称
+                                                    </th>
+
+                                                    <th>
+                                                        <i class="icon-caret-right blue"></i>
+                                                        价格
+                                                    </th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                <volist name="arr" id="vol">
+                                                    <tr>
+                                                        <td>{$vol.name}</td>
+
+                                                        <td>
+                                                            <small>
+                                                                <i class="red">RMB</i>
+                                                            </small>
+                                                            <b class="green">{$vol.value}</b>
+                                                        </td>
+                                                    </tr>
+                                                </volist>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="widget-header widget-header-flat">
+                                                <h5>
+                                                    <i class="icon-signal"></i>
+                                                    价目图
+                                                </h5>
+                                            </div>
+                                            <div class="space-6"></div>
+                                            <div class="">
+
+                                                <div id="groupassetchart1" style="height:300px;"></div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="bb-box" class="widget-box no-border">
+                                        <div class="widget-body">
+                                            <div class="col-sm-8">
+                                                <div class="widget-header widget-header-flat">
+                                                    <h4 class="lighter">
+                                                        <i class="icon-star orange"></i>
+                                                        行政价目表
+                                                    </h4>
+
+                                                    <div class="widget-toolbar">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-bordered table-striped">
+                                                    <thead class="thin-border-bottom">
+                                                    <tr>
+                                                        <th>
+                                                            <i class="icon-caret-right blue"></i>
+                                                            小组名称
+                                                        </th>
+
+                                                        <th>
+                                                            <i class="icon-caret-right blue"></i>
+                                                            价格
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                    <volist name="arr" id="vol">
+                                                        <tr>
+                                                            <td>{$vol.name}</td>
+
+                                                            <td>
+                                                                <small>
+                                                                    <i class="red">RMB</i>
+                                                                </small>
+                                                                <b class="green">{$vol.value}</b>
+                                                            </td>
+                                                        </tr>
+                                                    </volist>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="widget-header widget-header-flat">
+                                                    <h5>
+                                                        <i class="icon-signal"></i>
+                                                        价目图
+                                                    </h5>
+                                                </div>
+                                                <div class="space-6"></div>
+                                                <div class="">
+
+                                                    <div id="groupassetchart2" style="height:300px;"></div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div id="cc-box" class="widget-box no-border">
+                                        <div class="widget-body">
+                                            <div class="col-sm-8">
+                                                <div class="widget-header widget-header-flat">
+                                                    <h4 class="lighter">
+                                                        <i class="icon-star orange"></i>
+                                                        管理价目表
+                                                    </h4>
+
+                                                    <div class="widget-toolbar">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-bordered table-striped">
+                                                    <thead class="thin-border-bottom">
+                                                    <tr>
+                                                        <th>
+                                                            <i class="icon-caret-right blue"></i>
+                                                            小组名称
+                                                        </th>
+
+                                                        <th>
+                                                            <i class="icon-caret-right blue"></i>
+                                                            价格
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                    <volist name="arr" id="vol">
+                                                        <tr>
+                                                            <td>{$vol.name}</td>
+
+                                                            <td>
+                                                                <small>
+                                                                    <i class="red">RMB</i>
+                                                                </small>
+                                                                <b class="green">{$vol.value}</b>
+                                                            </td>
+                                                        </tr>
+                                                    </volist>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="widget-header widget-header-flat">
+                                                    <h5>
+                                                        <i class="icon-signal"></i>
+                                                        价目图
+                                                    </h5>
+                                                </div>
+                                                <div class="space-6"></div>
+                                                <div class="">
+
+                                                    <div id="groupassetchart3" style="height:300px;"></div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div id="dd-box" class="widget-box no-border">
+                                        <div class="widget-body">
+                                            <div class="col-sm-8">
+                                                <div class="widget-header widget-header-flat">
+                                                    <h4 class="lighter">
+                                                        <i class="icon-star orange"></i>
+                                                        财务价目表
+                                                    </h4>
+
+                                                    <div class="widget-toolbar">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-bordered table-striped">
+                                                    <thead class="thin-border-bottom">
+                                                    <tr>
+                                                        <th>
+                                                            <i class="icon-caret-right blue"></i>
+                                                            小组名称
+                                                        </th>
+
+                                                        <th>
+                                                            <i class="icon-caret-right blue"></i>
+                                                            价格
+                                                        </th>
+
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                    <volist name="arr" id="vol">
+                                                        <tr>
+                                                            <td>{$vol.name}</td>
+
+                                                            <td>
+                                                                <small>
+                                                                    <s class="red">RMB</s>
+                                                                </small>
+                                                                <b class="green">{$vol.value}</b>
+                                                            </td>
+                                                        </tr>
+                                                    </volist>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <div class="widget-header widget-header-flat">
+                                                    <h5>
+                                                        <i class="icon-signal"></i>
+                                                        价目图
+                                                    </h5>
+                                                </div>
+                                                <div class="space-6"></div>
+                                                <div class="">
+
+                                                    <div id="groupassetchart4" style="height:300px;"></div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+            </div>
+
+                <!-- PAGE CONTENT ENDS -->
+        </div>
+    </div>
+</div> <!-- /.main-content -->
+
+</div><!-- / .main-container-inner -->
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="{$Think.const.JS_URL}jquery-2.0.3.min.js"></script>
+
+<!-- <![endif]-->
+
+
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='{$Think.const.JS_URL}jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="{$Think.const.JS_URL}flot/jquery.flot.min.js"></script>
+<script src="{$Think.const.JS_URL}flot/jquery.flot.pie.min.js"></script>
+<script src="{$Think.const.JS_URL}flot/jquery.flot.resize.min.js"></script>
+<script src="{$Think.const.JS_URL}echarts.min.js"></script>
+
+<!-- ace scripts -->
+
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+<include file="Public:check"/>
+
+<!-- inline scripts related to this page -->
+
+<script>
+
+    function show_box(id) {
+        jQuery('.widget-box.visible').removeClass('visible');
+        jQuery('#'+id).addClass('visible');
+    }
+
+    var piedepartdata1,piedepartdata2,piedepartdata3,piedepartdata4,piedepartdata5;
+    var groupassetchart1 = echarts.init(document.getElementById('groupassetchart1'));
+    $.ajax({
+        type: "GET",
+        url: "{:U('asset/pieGroupData')}&depart=1",
+        async: false,
+        dataType: "json",
+        success: function(data){
+            piedepartdata1 = data;
+        }
+    });
+
+    var option1 = {
+
+        calculable : true,
+        series : [
+            {
+                name:'小组资产',
+                type:'pie',
+                radius : '80%',
+                center: ['50%', '50%'],
+                data:piedepartdata1
+            }
+        ]
+
+    };// 饼状图
+    groupassetchart1.setOption(option1);
+
+    var groupassetchart2 = echarts.init(document.getElementById('groupassetchart2'));
+    $.ajax({
+        type: "GET",
+        url: "{:U('asset/pieGroupData')}&depart=2",
+        async: false,
+        dataType: "json",
+        success: function(data){
+            piedepartdata2 = data;
+        }
+    });
+
+    var option2 = {
+
+        calculable : true,
+        series : [
+            {
+                name:'小组资产',
+                type:'pie',
+                radius : '80%',
+                center: ['50%', '50%'],
+                data:piedepartdata2
+            }
+        ]
+
+    };// 饼状图
+    groupassetchart2.setOption(option2);
+
+    var groupassetchart3 = echarts.init(document.getElementById('groupassetchart3'));
+    $.ajax({
+        type: "GET",
+        url: "{:U('asset/pieGroupData')}&depart=3",
+        async: false,
+        dataType: "json",
+        success: function(data){
+            piedepartdata3 = data;
+        }
+    });
+
+    var option3 = {
+
+        calculable : true,
+        series : [
+            {
+                name:'小组资产',
+                type:'pie',
+                radius : '80%',
+                center: ['50%', '50%'],
+                data:piedepartdata3
+            }
+        ]
+
+    };// 饼状图
+    groupassetchart3.setOption(option3);
+
+    var groupassetchart4 = echarts.init(document.getElementById('groupassetchart4'));
+    $.ajax({
+        type: "GET",
+        url: "{:U('asset/pieGroupData')}&depart=4",
+        async: false,
+        dataType: "json",
+        success: function(data){
+            piedepartdata4 = data;
+        }
+    });
+
+    var option4 = {
+
+        calculable : true,
+        series : [
+            {
+                name:'小组资产',
+                type:'pie',
+                radius : '80%',
+                center: ['50%', '50%'],
+                data:piedepartdata4
+            }
+        ]
+
+    };// 饼状图
+    groupassetchart4.setOption(option4);
+
+</script>
+
+<include file="Public:footer"/>

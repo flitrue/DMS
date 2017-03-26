@@ -1,0 +1,163 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+            </li>
+
+            <li class="active">{:L('SENDEMAIL')}</li>
+        </ul><!-- .breadcrumb -->
+
+        <!--<div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div>-->
+        <!-- #nav-search -->
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                {:L('SENDEMAIL')}
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    {:L('SEND')}
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="btn-toolbar noprint">
+
+                    <div class="btn-group">
+                        <a href="JavaScript:history.back(-1)" class="btn btn-info" id="" title="返回"><i class="icon-reply icon-2x icon-only"></i></a>
+                    </div>
+
+                </div>
+                <div class="space-4"></div>
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <form id="id-message-form" method="post" action="{:U('staff/sendtostaff')}" class="form-horizontal message-form  col-xs-12 visible" >
+                            <div class="">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="form-field-recipient">收件人:</label>
+
+                                    <div class="col-xs-12 col-sm-6">
+												<span class="input-icon col-sm-6" >
+													<input type="email" class="col-sm-12" name="recipient"  id="form-field-recipient" value="{$email}"/>
+												</span>
+                                    </div>
+                                </div>
+
+                                <div class="hr hr-18 dotted"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right" for="form-field-subject">主题:</label>
+
+                                    <div class="col-xs-12 col-sm-6">
+                                        <span class="input-icon col-sm-6" >
+                                            <input type="text" class="col-sm-12" name="subject" id="form-field-subject" placeholder="Subject" />
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="hr hr-18 dotted"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">
+                                        <span class="inline space-24 hidden-480"></span>
+                                        邮件内容:
+                                    </label>
+
+                                    <div class="col-sm-9">
+                                        <textarea  name="message" class="wysiwyg-editor col-sm-6 col-xs-12" ></textarea>
+
+                                    </div>
+                                </div>
+
+                                <div class="message-item-bar">
+
+                                    <div class="messagebar-item-right">
+                                        <span class="inline btn-send-message">
+                                            <button type="submit" id="sendmail" class="btn btn-sm btn-primary no-border">
+                                                <span class="bigger-110">{:L('SEND')}</span>
+
+                                                <i class="icon-arrow-right icon-on-right"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </form>
+
+
+                        <div class="hr hr-18 dotted"></div>
+
+                        <div class="space"></div>
+                    </div>
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="{$Think.const.JS_URL}jquery-2.0.3.min.js"></script>
+
+<!-- <![endif]-->
+
+
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='{$Think.const.JS_URL}jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<!--<script src="{$Think.const.JS_URL}jquery.hotkeys.min.js"></script>
+<script src="{$Think.const.JS_URL}bootstrap-wysiwyg.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery-ui-1.10.3.custom.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.ui.touch-punch.min.js"></script>
+<script src="{$Think.const.JS_URL}jquery.slimscroll.min.js"></script>-->
+
+
+<!-- ace scripts -->
+
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+
+
+<include file="Public:footer"/>
