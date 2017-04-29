@@ -3,6 +3,6 @@
 namespace Home\Model;
 use Think\Model;
 
-class LogrModel extends Model{
+class LogModel extends Model{
 
 }

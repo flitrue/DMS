@@ -7,7 +7,7 @@ if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 
 // 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
 define('APP_DEBUG',true);
-define('BIND_MODULE','Home');   //指定默认的访问模块是home
+//define('BIND_MODULE','Home');   //指定默认的访问模块是home
 // 定义应用目录
 define('APP_PATH','./DMS/');        // 站点目录
 define("SITE_URL", "/");
