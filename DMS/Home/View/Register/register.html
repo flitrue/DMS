@@ -67,6 +67,12 @@
             border-left: 3px solid #59AfE4;
 
         }
+        .header-title{
+            text-decoration: none;
+        }
+        .header-title:hover{
+            text-decoration: none;
+        }
     </style>
     <!--[endif]-->
 </head>
@@ -74,8 +80,10 @@
 <body class="login-layout" style="background-color: white">
 <div class="header" style="height:62px;overflow: hidden;background-color: whitesmoke;border-bottom:1px solid #d6dfea;margin-top: 0">
     <h1 style="margin: 0;padding: 0;margin-left: 20px">
-        <img src="/favicon.ico" width="50px" height="50px" style="margin: 5px"/>
-        <span class="blue">{:L('APP_NAME')}</span>
+        <a href="/" class="header-title">
+            <img src="/favicon.ico" width="50px" height="50px" style="margin: 5px"/>
+            <span class="blue">{:L('APP_NAME')}</span>
+        </a>
     </h1>
 </div>
 <div class="main-container" >
@@ -83,10 +91,7 @@
 
         <div class="row" >
             <div class="col-xs-4">
-                <div class="space-24"></div>
-                <div class="col-sm-offset-1">
-                    <img src="{$Think.const.IMAGE_UPLOADURL}register.jpg" alt="">
-                </div>
+
             </div>
             <div class="col-xs-8 ">
 

@@ -85,7 +85,10 @@
                                     </label>
 
                                     <div class="col-sm-9">
-                                        <textarea  name="message" class="wysiwyg-editor col-sm-6 col-xs-12" ></textarea>
+                                        <textarea  name="message" class="wysiwyg-editor col-sm-6 col-xs-12" >
+                                            {__PUBLIC__}
+                                            {__ROOT__}
+                                        </textarea>
 
                                     </div>
                                 </div>
@@ -143,6 +146,7 @@
 
 <script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
 <script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
 
 <!-- page specific plugin scripts -->
 <!--<script src="{$Think.const.JS_URL}jquery.hotkeys.min.js"></script>

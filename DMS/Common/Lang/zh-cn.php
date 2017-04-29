@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'APP_NAME'      =>      '沃德信息管理系统',
-    'KEYWORDS'      =>      '沃德信息管理系统,沃德社会气象站',
+    'APP_NAME'      =>      '企业信息管理系统',
+    'KEYWORDS'      =>      '企业信息管理系统',
     'Home'          =>      '首页',
     'Console'       =>      '首页',
     'LOOK'          =>      '查看',

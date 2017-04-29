@@ -219,7 +219,7 @@
 					<ul class="prodlist">
 						<volist name="arr" id="vol">
 							<li class="one_third">
-									<div class="thumb"><img src="{$vol.photo}" alt="" /></div>
+									<div class="thumb"><img src="{$vol.photo}" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" alt="" /></div>
 
 									<div class="content">
 										<div class="contentinner">
@@ -259,7 +259,7 @@
 
 <!-- basic scripts -->
 <script src="{$Think.const.JS_URL}jquery-1.7.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
 
 <script type="text/javascript">
 	if("ontouchend" in document) document.write("<script src='{$Think.const.JS_URL}jquery.mobile.custom.min.js'>"+"<"+"/script>");
@@ -378,8 +378,8 @@
 						},
 						stringLength: {
 							min: 2,
-							max: 50,
-							message: '描述最长长度为50'
+							max: 100,
+							message: '描述最长长度为100'
 						}
 					}
 				}
