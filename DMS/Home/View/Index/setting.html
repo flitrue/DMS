@@ -1,0 +1,564 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+            </li>
+
+            <li class="active">设置</li>
+        </ul><!-- .breadcrumb -->
+
+        <!--<div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div>-->
+        <!-- #nav-search -->
+    </div>
+
+    <div class="page-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="tabbable">
+                    <ul class="nav nav-tabs padding-18">
+
+                    <li class="active">
+                        <a data-toggle="tab" href="#loginbg-box">
+                            <i class="info icon-picture bigger-120"></i>
+                            登录背景
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-toggle="tab" href="#huandengpian-box">
+                            <i class="info icon-anchor bigger-120"></i>
+                            幻灯片设置
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-toggle="tab" href="#admin-box">
+                            <i class="info icon-wrench bigger-120"></i>
+                            设置管理员
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#depart-box">
+                            <i class="info icon-circle"></i>
+                            部门类别
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#group-box">
+                            <i class="info icon-bolt"></i>
+                            小组类别
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#patent-box">
+                            <i class="info icon-trophy bigger-120"></i>
+                            专利类别
+                        </a>
+                    </li>
+
+                    </ul>
+                </div>
+
+                <div class="tab-content no-border padding-24">
+
+                        <div id="loginbg-box" class="tab-pane in active">
+                            <div class="space-4"></div>
+                            <form id="loginbg-form" action="" method="post" >
+                                <div class="col-xs-12">
+                                    <label class="col-sm-1 control-label no-padding-right" >首页图片</label>
+
+                                    <div class="col-sm-5">
+                                        <div class="form-group ">
+                                            <span>请上传500*300的图片</span>
+                                            <input type="file" name="loginbg" id="id-input-file-2" />
+                                        </div>
+                                        <button class="btn btn-info" type="button" onclick="loginbgupload()">
+                                            <i class="icon-ok bigger-110"></i>
+                                            {$Think.lang.SAVE}
+                                        </button>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <img id="loginbg" src="{$loginbg}" title="首页图片">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="huandengpian-box" class="tab-pane">
+                            <form id="slide-form" action="" method="post" enctype="multipart/form-data">
+                                <div class="form-group col-xs-12">
+                                    <label class="col-sm-1 control-label no-padding-right" >第一张图片</label>
+
+                                    <div class="col-sm-5">
+
+                                        <span>请上传1000*350的图片</span>
+                                        <input type="file" name="url1" id="id-input-file-3" />
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-sm-1 control-label no-padding-right" >第二张图片</label>
+
+                                    <div class="col-sm-5">
+                                        <span>请上传1000*350的图片</span>
+                                        <input type="file" name="url2" id="id-input-file-4" />
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-sm-1 control-label no-padding-right" >第三张图片</label>
+
+                                    <div class="col-sm-5">
+                                        <span>请上传1000*350的图片</span>
+                                        <input type="file" name="url3" id="id-input-file-5" />
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-1 col-xs-9">
+                                        <div class="col-xs-2">
+                                            <button class="btn btn-info" type="button" onclick="slideupload()">
+                                                <i class="icon-ok bigger-110"></i>
+                                                {$Think.lang.SAVE}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div id="admin-box" class="tab-pane">
+                            <div class="row">
+                                <form id="addadmin-form" action="">
+                                    <div class="space-4"></div>
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <select name="admin" id="admin" style="width:100%;">
+                                                        <option value="">请选择一名员工</option>
+                                                        <volist name="user" id="vol">
+                                                            <option value="{$vol.id}">{$vol.name}({$vol.email})</option>
+                                                        </volist>
+                                                    </select>
+                                                    <div class="space-16"></div>
+                                                    <button class="btn btn-info" type="button" onclick="addadmin()">
+                                                        <i class="icon-ok bigger-110"></i>
+                                                        {$Think.lang.SAVE}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div id="admin-table" class="table-responsive">
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>姓名</th>
+                                                        <th>邮箱</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <volist name="admin" id="vol">
+                                                        <tr>
+                                                            <td><nobr>{$vol.name}</nobr></td>
+                                                            <td><nobr>{$vol.email}</nobr></td>
+                                                            <td>
+                                                                <nobr>
+                                                                    <a href="{:U('index/admin_del')}&id={$vol.id}" class="btn btn-info btn-xs btn-danger bootbox-confirm">
+                                                                        <i class="icon-trash bigger-120"></i>
+                                                                    </a>
+                                                                    <a href="{:U('staff/detail')}&uid={$vol.id}" class="btn btn-xs btn-warning" title="查看详细信息">
+                                                                        <i class="icon-eye-open bigger-120"></i>
+                                                                    </a>
+                                                                </nobr>
+                                                            </td>
+                                                        </tr>
+
+                                                    </volist>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                    </div>
+                        <div id="depart-box" class="tab-pane">
+                        <form method="post" id="depart-form">
+                            <div class="space-4"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" >部门类别</label>
+
+                                <div class="col-sm-9">
+                                    <div class="col-sm-6">
+                                        <input type="text" name="depart">
+                                        <div class="space-16"></div>
+                                        <button class="btn btn-info" type="button" onclick="departsave()">
+                                            <i class="icon-ok bigger-110"></i>
+                                            {$Think.lang.SAVE}
+                                        </button>
+                                    </div>
+                                    <div id="depart-table" class="table-responsive col-sm-6">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>名称</th>
+                                                <th>员工数</th>
+                                                <th>设备数</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <volist name="depart" id="vol">
+                                                <tr>
+                                                    <td>{$vol.name}</td>
+                                                    <td>{$vol.membercount}</td>
+                                                    <td>{$vol.devicecount}</td>
+                                                    <td>
+                                                        <a href="{:U('index/depart_del')}&id={$vol.id}" class="btn btn-info btn-xs btn-danger bootbox-confirm">
+                                                            <i class="icon-trash bigger-120"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                            </volist>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                        <div id="group-box" class="tab-pane">
+                            <form method="post" id="group-form">
+                            <div class="space-4"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" >小组类别</label>
+
+                                <div class="col-sm-9">
+                                    <div class="col-sm-6">
+                                        <input type="text" name="group">
+                                        <div class="space-16"></div>
+                                        <button class="btn btn-info" type="button" onclick="groupsave()">
+                                            <i class="icon-ok bigger-110"></i>
+                                            {$Think.lang.SAVE}
+                                        </button>
+                                    </div>
+                                    <div id="group-table" class="table-responsive col-sm-6">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>名称</th>
+                                                <th>员工数</th>
+                                                <th>设备数</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <volist name="group" id="vol">
+                                                <tr>
+                                                    <td>{$vol.name}</td>
+                                                    <td>{$vol.membercount}</td>
+                                                    <td>{$vol.devicecount}</td>
+                                                    <td>
+                                                        <a href="{:U('index/group_del')}&id={$vol.id}" class="btn btn-info btn-xs btn-danger bootbox-confirm">
+                                                            <i class="icon-trash bigger-120"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                            </volist>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                        <div id="patent-box" class="tab-pane">
+                        <form method="post" id="patent-form">
+                            <div class="space-4"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" >专利类别</label>
+
+                                <div class="col-sm-9">
+                                    <div class="col-sm-6">
+                                        <input type="text" name="patent">
+                                        <div class="space-16"></div>
+                                        <button class="btn btn-info" type="button" onclick="patentsave()">
+                                            <i class="icon-ok bigger-110"></i>
+                                            {$Think.lang.SAVE}
+                                        </button>
+                                    </div>
+                                    <div id="patent-table" class="table-responsive col-sm-6">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>名称</th>
+                                                <th>数量</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <volist name="category" id="vol">
+                                                <tr>
+                                                    <td>{$vol.name}</td>
+                                                    <td>{$vol.count}</td>
+                                                    <td>
+                                                        <a href="{:U('index/setting_del')}&id={$vol.id}" class="btn btn-info btn-xs btn-danger bootbox-confirm">
+                                                            <i class="icon-trash bigger-120"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                            </volist>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="{$Think.const.JS_URL}jquery-2.0.3.min.js"></script>
+
+<!-- <![endif]-->
+
+
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='{$Think.const.JS_URL}jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="{$Think.const.JS_URL}dropzone.min.js"></script>
+
+<!-- ace scripts -->
+
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+<include file="Public:check"/>
+
+<!-- inline scripts related to this page -->
+<script>
+
+    $('#id-input-file-2').ace_file_input({
+        no_file:'No File ...',
+        btn_choose:'Choose',
+        btn_change:'Change',
+        droppable:false,
+        onchange:null,
+        icon_remove: "",
+        thumbnail:true, //| true | large
+        whitelist:'gif|png|jpg|jpeg',
+        blacklist:'exe|php',
+        //onchange:''
+        //
+    });
+
+    $('#id-input-file-3').ace_file_input({
+        no_file:'No File ...',
+        btn_choose:'Choose',
+        btn_change:'Change',
+        droppable:false,
+        onchange:null,
+        icon_remove: "",
+        thumbnail:true, //| true | large
+        whitelist:'gif|png|jpg|jpeg',
+        blacklist:'exe|php',
+        //onchange:''
+        //
+    });
+
+    $('#id-input-file-4').ace_file_input({
+        no_file:'No File ...',
+        btn_choose:'Choose',
+        btn_change:'Change',
+        droppable:false,
+        onchange:null,
+        icon_remove: "",
+        thumbnail:true, //| true | large
+        whitelist:'gif|png|jpg|jpeg',
+        blacklist:'exe|php',
+        //onchange:''
+        //
+    });
+
+    $('#id-input-file-5').ace_file_input({
+        no_file:'No File ...',
+        btn_choose:'Choose',
+        btn_change:'Change',
+        droppable:false,
+        onchange:null,
+        icon_remove: "",
+        thumbnail:true, //| true | large
+        whitelist:'gif|png|jpg|jpeg',
+        blacklist:'exe|php',
+        //onchange:''
+        //
+    });
+
+    function loginbgupload(){
+        var data = new FormData(document.getElementById('loginbg-form'));
+        $.ajax({
+            url: "{:U('index/setting_save')}",
+            type: "post",
+            dataType: "json", // 必须的
+            processData:false, // 必须的
+            contentType:false, // 必须的
+            data: data,
+            success: function(res){
+                if(eval(res).code == 200){
+                    $("#loginbg").attr("src",eval(res).url);
+                }
+            }
+        });
+    }
+
+    function slideupload(){
+        var data = new FormData(document.getElementById('slide-form'));
+        $.ajax({
+            url: "{:U('index/slide_save')}",
+            type: "post",
+            dataType: "json", // 必须的
+            processData:false, // 必须的
+            contentType:false, // 必须的
+            data: data,
+            success: function(res){
+                if(eval(res).code == 200){
+                    alert("设置成功，请到首页查看");
+                }
+            }
+        });
+    }
+
+    function departsave(){
+        var depart=$("input[name=depart]").val();
+        if(depart){
+            var data = $("#depart-form").serialize();
+            $.ajax({
+                url: "{:U('index/depart_save')}",
+                type: "post",
+                dataType: "json", // 必须的
+                data: data,
+                success: function(res){
+                    if(eval(res).code == 200){
+                        $('#depart-table').html(eval(res).html);
+                    }
+                }
+            });
+        }
+    }
+
+    function groupsave(){
+        var group=$("input[name=group]").val();
+        if(group){
+            var data = $("#group-form").serialize();
+            $.ajax({
+                url: "{:U('index/group_save')}",
+                type: "post",
+                dataType: "json", // 必须的
+                data: data,
+                success: function(res){
+                    if(eval(res).code == 200){
+                        $('#group-table').html(eval(res).html);
+                    }
+                }
+            });
+        }
+    }
+
+    function patentsave(){
+        var patent=$("input[name=patent]").val();
+        if(patent){
+            var data = $("#patent-form").serialize();
+            $.ajax({
+                url: "{:U('index/depart_save')}",
+                type: "post",
+                dataType: "json", // 必须的
+                data: data,
+                success: function(res){
+                    console.log(res);
+                    if(eval(res).code == 200){
+                        $('#depart-table').html(eval(res).html);
+                    }
+                }
+            });
+        }
+    }
+
+    function addadmin() {
+        var bool=$("#admin option:selected").attr("value");
+        if(bool){
+            var data = $("#addadmin-form").serialize();
+            $.ajax({
+                url: "{:U('index/addadmin_save')}",
+                type: "post",
+                dataType: "json", // 必须的
+                data: data,
+                success: function(res){
+                    console.log(res);
+                    if(eval(res).code == 200){
+                        $('#admin-table').html(eval(res).html);
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+<include file="Public:footer"/>

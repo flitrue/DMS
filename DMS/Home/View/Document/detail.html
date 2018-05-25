@@ -1,0 +1,138 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="noprint">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+                </li>
+                <li>
+                    <a href="{:U('document/look')}">文档管理</a>
+                </li>
+                <li id="breadcrumb" class="active">查看文档</li>
+            </ul><!-- .breadcrumb -->
+
+           <!-- <div class="nav-search" id="nav-search">
+                <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+                </form>
+            </div>-->
+            <!-- #nav-search -->
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="page-header noprint">
+            <h1>
+                文档管理
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    {$Think.lang.LOOK}
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="btn-toolbar noprint">
+
+                    <div class="btn-group">
+                        <button class="btn btn-pink"  onclick="checkpower();window.location.href='{:U(\'document/edit\')}&id={$arr[0].id}'" title="编辑"><i class="icon-edit icon-2x icon-only"></i></button>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-danger" onclick="checkpower();bootbox.confirm('你确定要删除吗?', function (result) {
+												if (result) {
+													location.href='{:U(\'document/del\')}&id={$arr[0].id}';
+												}
+												});" title="删除"><i class="icon-trash icon-2x icon-only"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-warning" title="打印" onclick="printinfo();"><i class="icon-print icon-2x icon-only"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <a href="JavaScript:history.back(-1)" class="btn btn-info" id="" title="返回"><i class="icon-reply icon-2x icon-only"></i></a>
+                    </div>
+
+                </div>
+                <div class="space-2"></div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>文档名</th>
+                            <th>类型</th>
+                            <th>大小</th>
+                            <th>源文件名</th>
+                            <th>上传时间</th>
+                            <th>上次更新时间</th>
+                            <th>上传人</th>
+                            <th>{:L('TAG')}</th>
+                            <th>备注</th>
+                            <th>下载地址</th>
+                        </tr>
+                        <tr>
+                            <td>{$arr[0].name}</td>
+                            <td>{$arr[0].category}</td>
+                            <td>{$arr[0]['size']/1024|round=2}KB</td>
+                            <td>{$arr[0].oldname}</td>
+                            <td>{$arr[0].uploadtime}</td>
+                            <td>{$arr[0].updatetime}</td>
+                            <td><a href="{:U('staff/detail')}&uid={$arr[0].uid}" title="查看该员工">{$arr[0].username}</a></td>
+                            <td>{$arr[0].tag}</td>
+                            <td>{$arr[0].remarks}</td>
+                            <td>
+                                <a class="btn btn-purple btn-xs" onclick="location.href='{:U(\'document/download\')}&id={$arr[0].id}'" title="下载">
+                                    <i class="icon-download-alt bigger-120"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<include file="Public:scripts"/>
+<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+<script src="{$Think.const.JS_URL}jquery.colorbox-min.js"></script>
+<script>
+
+    // 打印
+    function printinfo(){
+        $(".main-content").css('margin-left',0);
+        $("a").removeAttr('href');
+
+        window.print();
+        window.location.reload();
+
+    }
+</script>
+
+<include file="Public:footer"/>

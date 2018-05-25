@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{:L('APP_NAME')}</title>
+    <meta name="keywords" content="{:L('KEYWORDS')}" />
+    <meta name="description" content="{:L('KEYWORDS')}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="bookmark" href="/favicon.ico"/>
+    <!-- basic styles -->
+
+    <link href="{$Think.const.CSS_URL}bootstrap.min.css" rel="stylesheet" />
+    <link href="{$Think.const.CSS_URL}font-awesome.min.css" rel="stylesheet" />
+    <link href="{$Think.const.CSS_URL}bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    <!--[if IE 7]-->
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}font-awesome-ie7.min.css" />
+    <!--[endif]-->
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}bootstrapValidator.min.css" />
+
+    <!-- fonts -->
+
+    <style>
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Open Sans Light'), local('OpenSans-Light'), url({$Think.const.ASSETS_URL}font/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Open Sans'), local('OpenSans'), url({$Think.const.ASSETS_URL}font/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+        }
+        html,body{height:100%}
+    </style>
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}jquery-ui-1.10.3.full.min.css" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ace.min.css" />
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ace-rtl.min.css" />
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="{$Think.const.CSS_URL}ace-ie.min.css" />
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]-->
+    <script src="{$Think.const.JS_URL}html5shiv.js"></script>
+    <script src="{$Think.const.JS_URL}respond.min.js"></script>
+    <style>
+        .haomaTitle{
+            position: relative;
+            width: 50%;
+            border-bottom: 1px solid #ddd;
+        }
+        .haoma-inner{
+            position: absolute;
+            line-height: 25px;
+            border-left: 3px solid #59AfE4;
+
+        }
+        .header-title{
+            text-decoration: none;
+        }
+        .header-title:hover{
+            text-decoration: none;
+        }
+    </style>
+    <!--[endif]-->
+</head>
+
+<body class="login-layout" style="background-color: white">
+<div class="header" style="height:62px;overflow: hidden;background-color: whitesmoke;border-bottom:1px solid #d6dfea;margin-top: 0">
+    <h1 style="margin: 0;padding: 0;margin-left: 20px">
+        <a href="/" class="header-title">
+            <img src="/favicon.ico" width="50px" height="50px" style="margin: 5px"/>
+            <span class="blue">{:L('APP_NAME')}</span>
+        </a>
+    </h1>
+</div>
+<div class="main-container" >
+    <div class="main-content">
+
+        <div class="row" >
+            <div class="col-xs-4">
+
+            </div>
+            <div class="col-xs-8 ">
+
+                <h4 class="header green lighter bigger" style="width: 50%">
+                    <i class="icon-group blue"></i>
+                    员工注册
+                    <label class="pull-right grey"><a href="/">返回登录</a></label>
+                </h4>
+
+                <form id="user-form" class="form-horizontal" role="form" method="post">
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="name"> {:L('NAME')} </label>
+
+                        <div class="col-xs-4">
+                            <label class="input-group">
+                                <input type="text"  id="name" class="col-xs-12" name="name"/>
+                                <span class="input-group-addon">
+                                    <i class="icon-user"></i>
+                                </span>
+                            </label>
+                        </div>
+                        <span>请输入你的真实的中文名字</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right"> {:L('GENDER')} </label>
+
+                        <div class="col-xs-4">
+                            <label class="inline" style="margin-right: 10px;">
+                                <input name="sex" type="radio" class="ace" value="男" checked="checked"/>
+                                <span class="lbl"> {:L('MALE')} </span>
+                            </label>
+
+
+                            <label class="inline">
+                                <input name="sex" type="radio" class="ace" value="女"/>
+                                <span class="lbl"> {:L('FEMALE')} </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="idcard"> {:L('IDCARD')} </label>
+
+                        <div class="col-xs-4">
+                            <label class="input-group">
+                                <input type="datetime" id="idcard" class="col-xs-12" name="idcard"/>
+                                <span class="input-group-addon">
+                                    <i class="icon-credit-card"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="date"> {:L('BRITH')} </label>
+
+                        <div class="col-xs-4">
+                            <label class="input-group">
+
+                                <input class="datepicker1 col-xs-12" id="date" name="brith" type="text" data-date-format="yyyy-mm-dd" readonly="readonly"/>
+                                <span class="input-group-addon">
+                                    <i class="icon-calendar"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="phone"> {:L('PHONE')} </label>
+
+                        <div class="col-xs-4">
+                            <label class="input-group">
+                                <input type="text" id="phone" class="col-xs-12" name="phone"/>
+                                <span class="input-group-addon">
+                                    <i class="icon-phone icon-flip-horizontal"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="email">Email</label>
+
+                        <div class="col-xs-8">
+                            <span class="input-group" style="margin-left: 1%">
+                                <input type="text" id="email" name="email"/>@
+                                <select name="domain" title="">
+                                    <volist name="domain" id="vol">
+                                        <option value="{$vol.name}">{$vol.name}</option>
+                                    </volist>
+                                </select>
+                                <span> 请输入你的企业邮箱</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="weixin">微信号</label>
+
+                        <div class="col-xs-4">
+                            <label class="input-group">
+                                <input type="text" id="weixin" class="col-xs-12" name="weixin"/>
+                                <span class="input-group-addon">
+                                    <i class="icon-comments"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="qq"> QQ号 </label>
+
+                        <div class="col-xs-4">
+                            <label class="input-group">
+                                <input type="text" id="qq" class="col-xs-12" name="qq"/>
+                                <span class="input-group-addon" style="padding: 0 11px 0 11px">
+
+									<img src="{$Think.const.IMAGE_URL}sqq.png" title="qq"/>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="time"> 入职时间 </label>
+
+                        <label class="col-xs-4">
+                            <div class="input-group">
+                                <input type="text" id="time"  class="datepicker2 col-xs-12" name="time"  data-date-format="yyyy-mm-dd" readonly="readonly"/>
+                                <span class="input-group-addon">
+                                <i class="icon-calendar"></i>
+                            </span>
+                            </div>
+                            <span id="tishi" style="color: #d16e6c"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label no-padding-right" for="depart">部门</label>
+                        <div class="col-xs-2">
+                            <select class="form-control" id="depart" name="depart">
+                                <option value="">&nbsp;==请选择==&nbsp;</option>
+                                <volist name="depart" id="vol">
+                                    <option value="{$vol.name}">{$vol.name}</option>
+                                </volist>
+
+                            </select>
+                        </div>
+
+                        <label class="col-xs-1 control-label" for="group">小组</label>
+                        <div class="col-xs-2">
+                            <select class="form-control " id="group" name="group">
+                                <option value="">&nbsp;==请选择==&nbsp;</option>
+                                <volist name="group" id="vol">
+                                    <option value="{$vol.name}">{$vol.name}</option>
+                                </volist>
+
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class=" form-group">
+                        <div class="col-md-offset-1 col-xs-9">
+                            <div class="col-xs-2">
+                                <button id="submit" class="btn btn-info" type="button" onclick="add_userinfo();">
+                                    <i class="icon-ok bigger-110"></i>
+                                    注册
+                                </button>
+                            </div>
+
+                            <button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                {$Think.lang.RESET}
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div><!-- /.row -->
+
+    </div>
+</div><!-- /.main-container -->
+<!--<footer class="container-fluid foot-wrap center"  style="background-color: whitesmoke;border-top:1px solid #d6dfea;position:absolute;bottom:0;width: 100%;font-size: 15px">
+    <div class="footer"><a href="http://www.stockemotion.com" target="_blank">关于我们</a>&nbsp;|&nbsp;<a href="#" title="13811423600">联系我们</a>&nbsp;|&nbsp;<span class="blue">&copy; 沃民高新科技（北京）股份有限公司</span></div>
+</footer>-->
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+
+<!-- inline scripts related to this page -->
+<include file="Public:scripts"/>
+
+<script type="text/javascript">
+
+    jQuery(function($) {
+        $(".datepicker1").datepicker({
+            changeYear: true,
+            changeMonth: true,
+            defaultDate: "1992-05-11",
+            maxDate: "2000-12-31",
+            minDate: "1949-10-01",
+            showMonthAfterYear:true,
+            monthNamesShort: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+            dateFormat: "yy-mm-dd"
+        });
+        $(".datepicker2").datepicker({
+            changeYear: true,
+            changeMonth: true,
+            maxDate: "today",
+            minDate: "2014-01-01",
+            showMonthAfterYear:true,
+            monthNamesShort: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+            dateFormat: "yy-mm-dd"
+        });
+
+        var idcard = $("#idcard");
+        idcard.on("keyup",function(){
+            var str = $(this).val();
+            if(str.length >= 7 ){
+                var str1 = str.substr(6,4);
+                var str2 = str.substr(10,2);
+                var str3 = str.substr(12,2);
+                var date =  $("#date");
+                date.val(str1);
+                if(str.length == 10 ){
+                    date.val(str1+'-');
+                }
+                if(str.length > 10){
+                    date.val(str1+'-'+str2);
+                }
+                if(str.length == 12){
+                    date.val(str1+'-'+str2+'-');
+                }
+                if(str.length > 12){
+                    date.val(str1+'-'+str2+'-'+str3);
+                }
+            }
+            if(idcard.val() == ''){
+                $("#date").val("");
+            }
+        });
+
+    });
+
+    function add_userinfo(){
+
+        var bootstrapValidator = $("#user-form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        var bool = checkjointime();
+        if(!bool){
+            return false;
+        }
+        if(bootstrapValidator.isValid()){
+            bootbox.confirm('你确定要提交吗?', function (result) {
+                if (result) {
+                    var data = $('#user-form').serialize();
+                    $.ajax({
+                        url: "{:U('register/add_save')}",
+                        type: 'post',
+                        data: data,
+                        dataType: "json",
+                        success: function (res) {
+                            console.log(res);
+                            showdialogs(res);
+                        }
+                    });
+                }
+            });
+        }else{
+            return false;
+        }
+    }
+
+    function showdialogs(res){
+        if(eval(res).code == '200'){
+            bootbox.alert({
+                buttons: {
+                    ok: {
+                        label: 'OK',
+                        className: 'btn-default'
+                    }
+                },
+                message: '恭喜你，注册成功,请到邮箱查看密钥',
+                title: "提交成功",
+                callback: function(){
+                    window.location.href="{:U('login/login')}";
+                }
+            });
+        }else{
+            bootbox.alert({
+                buttons: {
+                    ok: {
+                        label: 'OK',
+                        className: 'btn-default'
+                    }
+                },
+                message: '注册失败',
+                title: "提交失败了",
+                callback: function(){
+                    window.location.reload();
+                }
+            });
+        }
+    }
+    $("#time").bootstrapValidator({
+        message: '请输入有效的值',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            time: {
+                validators: {
+                    notEmpty: {
+                        message: '不能为空'
+                    }
+                }
+            }
+        }
+    });
+
+    $('#user-form')
+            .bootstrapValidator({
+                message: '请输入有效的值',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    name: {
+                        message: '用户名无效',
+                        validators: {
+                            notEmpty: {
+                                message: '用户名不能为空'
+                            },
+                            stringLength: {
+                                min: 2,
+                                max: 8,
+                                message: '用户名长度为2~8'
+                            }
+                        }
+                    },
+                    idcard: {
+                        validators: {
+                            notEmpty: {
+                                message: '身份证号不能为空'
+                            },
+                            regexp: {
+                                regexp: /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/,
+                                message: '身份证号格式不正确'
+                            },
+                            remote: {
+                                url: "{:U('register/checkidcard')}",
+                                message: '身份证号已存在',
+                                delay: 2000,
+                                type: 'POST'
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: '邮箱不能为空'
+                            },
+                            regexp: {
+                                regexp: /^([a-zA-Z])[a-zA-Z]+/,
+                                message: '邮箱格式不正确'
+                            },
+                            remote: {
+                                url: "{:U('register/emailcheck')}",
+                                message: '邮箱已存在',
+                                delay :  2000,
+                                type: 'POST'
+                            }
+                        }
+                    },
+                    phone: {
+                        validators: {
+                            notEmpty: {
+                                message: '手机号不能为空'
+                            },
+                            regexp: {
+                                regexp: /^1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}$/,
+                                message: '手机号格式不正确'
+                            },
+                            remote: {
+                                url: "{:U('register/checkphone')}",
+                                message: '手机号已存在',
+                                delay :  2000,
+                                type: 'POST'
+                            }
+                        }
+                    },
+                    qq: {
+                        validators: {
+                            notEmpty: {
+                                message: 'QQ号不能为空'
+                            },
+                            regexp: {
+                                regexp: /^\d{5,12}$/,
+                                message: '格式不正确'
+                            }
+                        }
+                    },
+                    depart: {
+                        validators: {
+                            notEmpty: {
+                                message: '部门不能为空'
+                            }
+                        }
+                    },
+                    group: {
+                        validators: {
+                            notEmpty: {
+                                message: '小组不能为空'
+                            }
+                        }
+                    },
+                    status: {
+                        validators: {
+                            notEmpty: {
+                                message: '员工工作状态不能为空'
+                            }
+                        }
+                    }
+                }
+            });
+
+    var jointime = $("input[name=time]");
+    jointime.on("change",function(){
+
+        if($(this).val() == ''){
+            $("#tishi").html("<i class='form-control-feedback glyphicon glyphicon-remove'><br>入职时间不能为空</i>");
+            $(this).css('borderColor' , "#f09784");
+            $(".time").css("color","#d16e6c");
+        }else{
+            $("#tishi").html("<i class='form-control-feedback bv-icon-input-group glyphicon glyphicon-ok' style='color:#8bad4c'></i>");
+            $(this).css('borderColor' , "#b5b5b5");
+            $(".time").css("color","#000");
+        }
+    });
+
+    function checkjointime(){
+
+        if(jointime.val() == ''){
+            var tishi = $("#tishi");
+            if(tishi.text() == ''){
+                tishi.html("<i class='form-control-feedback glyphicon glyphicon-remove'><br>入职时间不能为空</i>");
+                jointime.css('borderColor' , "#f09784");
+                tishi.css("color","#d16e6c");
+                return false;
+            }else{
+                tishi.html("<i class='form-control-feedback bv-icon-input-group glyphicon glyphicon-ok' style='color:#8bad4c'></i>");
+            }
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
+
+<include file="Public:footer"/>

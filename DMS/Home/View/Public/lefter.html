@@ -1,0 +1,237 @@
+<div class="sidebar noprint" id="sidebar">
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+    </script>
+
+   <!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+            <a href="{:U('index/index')}" class="btn btn-success" title="{$Think.lang.Console}">
+                <i class="icon-home"></i>
+            </a>
+
+            <a href="{:U('device/look')}" class="btn btn-info" title="设备列表">
+                <i class="icon-desktop"></i>
+            </a>
+
+            <a href="{:U('staff/look')}" class="btn btn-warning" title="员工列表">
+                <i class="icon-group"></i>
+            </a>
+
+            <a href="{:U('index/profile')}" class="btn btn-danger" title="个人资料">
+                <i class="icon-user"></i>
+            </a>
+        </div>
+
+    </div>-->
+    <!-- #sidebar-shortcuts -->
+
+    <ul id="nav" class="nav nav-list">
+        <li >
+            <a href="{:U('index/index')}">
+                <i class="icon-home"></i>
+                <span class="menu-text">{:L('Console')}</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{:U('staff/look')}" class="dropdown-toggle">
+                <i class="icon-text-width"></i>
+                <span class="menu-text">员工管理</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{:U('device/look')}" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text">设备管理</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{:U('asset/depart')}" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text">资产统计</span>
+            </a>
+        </li>
+
+
+        <!--<li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text"> 资产统计 </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="{:U('asset/depart')}">
+                        <i class="icon-double-angle-right"></i>
+                        部门资产
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('asset/group')}">
+                        <i class="icon-double-angle-right"></i>
+                        小组资产
+                    </a>
+                </li>
+
+            </ul>
+        </li>-->
+
+        <!--<li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text"> {:L('LOGMAG')} </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="{:U('log/look')}">
+                        <i class="icon-double-angle-right"></i>
+                        {:L('LOOKLOG')}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('log/add')}">
+                        <i class="icon-double-angle-right"></i>
+                        {:L('ADDLOG')}
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+-->
+
+        <!--<li>
+            <a href="{:U('index/search')}">
+                <i class="icon-search"></i>
+
+                <span class="menu-text">
+							{:L('SEARCH')}
+						</span>
+            </a>
+        </li>-->
+
+        <li class="needhidden">
+            <a href="{:U('patent/look')}" class="dropdown-toggle">
+                <i class="icon-trophy"></i>
+                <span class="menu-text">专利管理</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{:U('document/look')}" class="dropdown-toggle">
+                <i class="icon-book"></i>
+                <span class="menu-text">文档管理</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{:U('album/gallery')}">
+                <i class="icon-picture"></i>
+                <span class="menu-text"> {:L('MEDIAMEG')} </span>
+            </a>
+        </li>
+
+        <li>
+            <a href="https://misc.stockemotion.com">
+                <i class=" icon-external-link"></i>
+                <span class="menu-text"> 股市综合榜 </span>
+            </a>
+        </li>
+        <!--<li>
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text"> 其他页面 </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+
+                <li>
+                    <a href="{:U('index/addlog')}">
+                        <i class="icon-double-angle-right"></i>
+                        addlog.html
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('index/blank')}">
+                        <i class="icon-double-angle-right"></i>
+                        blank.html
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('index/form-wizard')}">
+                        <i class="icon-double-angle-right"></i>
+                        form-wizard.html
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('index/inbox')}">
+                        <i class="icon-double-angle-right"></i>
+                        inbox.html
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('index/jqgrid')}">
+                        <i class="icon-double-angle-right"></i>
+                        jqgrid.html
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('index/tables')}">
+                        <i class="icon-double-angle-right"></i>
+                        tables.html
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('index/timeline')}">
+                        <i class="icon-double-angle-right"></i>
+                        timeline.html
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('index/typography')}">
+                        <i class="icon-double-angle-right"></i>
+                        typography.html
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{:U('test/index')}">
+                        <i class="icon-double-angle-right"></i>
+                        test.html
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>-->
+
+
+    </ul><!-- /.nav-list -->
+
+    <div class="sidebar-collapse" id="sidebar-collapse">
+        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+    </div>
+
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+    </script>
+</div>

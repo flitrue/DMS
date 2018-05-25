@@ -1,0 +1,507 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+			try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+		</script>
+
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home home-icon"></i>
+				<a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+			</li>
+
+			<li id="breadcrumb" class="active">{$Think.lang.ADDSTAFF}</li>
+		</ul><!-- .breadcrumb -->
+
+		<!--<div class="nav-search" id="nav-search">
+			<form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+			</form>
+		</div>-->
+		<!-- #nav-search -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				{$Think.lang.STAFFMAG}
+				<small>
+					<i class="icon-double-angle-right"></i>
+					{$Think.lang.ADD}
+				</small>
+			</h1>
+		</div><!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<div class="btn-toolbar noprint">
+
+					<div class="btn-group">
+						<a href="JavaScript:history.back(-1)" class="btn btn-info" id="" title="返回"><i class="icon-reply icon-2x icon-only"></i></a>
+					</div>
+
+				</div>
+				<div class="space-6"></div>
+
+				<div class="col-xs-3" style="margin-top: 50px;">
+
+					<div class="pull-right" id="cropContainerPreload" style="width: 150px;height: 150px;position:relative;background-image: url('{$Think.const.SMALL_AVATARSURL}avatar.png');background-repeat: no-repeat"></div>
+					<span class="btn pull-right" id="cropContainerHeaderButton">改变头像</span>
+				</div>
+
+				<div class="col-xs-9">
+					<form id="user-form" class="form-horizontal" role="form" action="">
+						<div class="form-group">
+							<label class="col-xs-1 control-label no-padding-right" for="name"> {:L('NAME')} </label>
+
+							<div class="col-xs-4">
+								<div class="input-group">
+									<input type="text"  id="name" class="col-xs-12" name="name"/>
+									<span class="input-group-addon">
+                                    <i class="icon-user"></i>
+                                </span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-1 control-label no-padding-right"> {:L('GENDER')} </label>
+
+							<div class="col-xs-4">
+								<label class="inline">
+									<input name="sex" type="radio" class="ace" value="男" checked="checked"/>
+									<span class="lbl"> {:L('MALE')} </span>
+								</label>
+
+
+								<label class="inline">
+									<input name="sex" type="radio" class="ace" value="女"/>
+									<span class="lbl"> {:L('FEMALE')} </span>
+								</label>
+							</div>
+						</div>
+
+						<!--<div class="form-group">
+							<label class="col-xs-1 control-label no-padding-right" for="code"> 编号 </label>
+
+							<div class="col-xs-4">
+								<div class="input-group">
+									<input type="text"  id="code" class="col-xs-12" name="code"/>
+									<span class="input-group-addon">
+                                    <i class="icon-legal"></i>
+                                </span>
+								</div>
+								<label id="tishi" style="display: block;color:red;"></label>
+								<span style="color:#70818e">比如:AB01  A表示技术部  B表示实习组  01表示员工序号</span>
+							</div>
+							<span class="help-button" data-rel="popover" data-html="true" data-trigger="hover" data-placement="bottom" data-content="{$html}" title="编号类型">?</span>
+						</div>-->
+
+						<div class="form-group">
+							<label class="col-xs-1 control-label no-padding-right" for="date"> {:L('BRITH')} </label>
+
+							<div class="col-xs-4">
+								<div class="input-group">
+
+									<input class="datepicker col-xs-12" id="date" name="brith" type="text" data-date-format="yyyy-mm-dd"  readonly="readonly"/>
+									<span class="input-group-addon">
+                                    <i class="icon-calendar"></i>
+                                </span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-1 control-label no-padding-right" for="idcard"> {:L('IDCARD')} </label>
+
+							<div class="col-xs-4">
+								<div class="input-group">
+									<input type="text" id="idcard" class="col-xs-12" name="idcard"/>
+									<span class="input-group-addon">
+                                    <i class="icon-credit-card"></i>
+                                </span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-1 control-label no-padding-right" for="phone"> {:L('PHONE')} </label>
+
+							<div class="col-xs-4">
+								<div class="input-group">
+									<input type="text" id="phone" class="col-xs-12" name="phone"/>
+									<span class="input-group-addon">
+                                    <i class="icon-phone icon-flip-horizontal"></i>
+                                </span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-1 control-label no-padding-right" for="email">Email</label>
+
+								<span style="margin-left: 1%">
+									<input type="text" id="email" name="email"/>@
+									<select name="domain" id="domain">
+										<volist name="domain" id="vol">
+											<option value="{$vol.name}">{$vol.name}</option>
+										</volist>
+									</select>
+								</span>
+						</div>
+						<div class="form-group">
+							<label class="col-md-1 control-label no-padding-right" for="weixin">微信号</label>
+
+							<div class="col-md-4 ">
+								<div class="input-group">
+									<input type="text" id="weixin" class="col-xs-12" name="weixin"/>
+									<span class="input-group-addon">
+                                    <i class="icon-comments"></i>
+                                </span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-8 col-md-1 control-label no-padding-right" for="qq"> QQ号 </label>
+
+							<div class="col-md-4">
+								<div class="input-group">
+									<input type="text" id="qq" class="col-xs-12" name="qq"/>
+									<span class="input-group-addon" style="padding: 0 11px 0 11px">
+
+									<img src="{$Think.const.IMAGE_URL}sqq.png" title="qq"/>
+                                <!--<i class="icon-comment"></i>-->
+                            		</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-12 col-md-1 control-label no-padding-right" for="time"> 入职时间 </label>
+
+							<div class="col-xs-12 col-md-4">
+								<div class="input-group">
+									<input type="text" id="time"  class="datepicker col-xs-12" name="time"  data-date-format="yyyy-mm-dd" readonly="readonly"/>
+									<span class="input-group-addon">
+                                		<i class="icon-calendar"></i>
+                           		 	</span>
+								</div>
+								<span id="tishi" class="red"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-1 control-label no-padding-right" for="depart">部门</label>
+							<div class="col-xs-2">
+								<select class="form-control" id="depart" name="depart">
+									<option value="">&nbsp;==请选择==&nbsp;</option>
+									<volist name="depart" id="vol">
+										<option value="{$vol.name}">{$vol.name}</option>
+									</volist>
+
+								</select>
+							</div>
+
+							<label class="col-xs-1 control-label" for="group">小组</label>
+							<div class="col-xs-2">
+								<select class="form-control " id="group" name="group">
+									<option value="">&nbsp;==请选择==&nbsp;</option>
+									<volist name="group" id="vol">
+										<option value="{$vol.name}">{$vol.name}</option>
+									</volist>
+
+
+								</select>
+							</div>
+
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-1 control-label no-padding-right" for="status">{:L('STATUS')}</label>
+							<div class="col-xs-2">
+								<select class="form-control" id="status" name="status">
+									<option value="">&nbsp;==请选择==&nbsp;</option>
+									<option value="在职">在职</option>
+									<option value="离职">离职</option>
+									<option value="审核中">审核中</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="clearfix form-group">
+							<div class="col-md-offset-1 col-xs-9">
+								<div class="col-xs-2">
+									<button id="submit" class="btn btn-info" type="button" onclick="add_userinfo();">
+										<i class="icon-ok bigger-110"></i>
+										{$Think.lang.SAVE}
+									</button>
+								</div>
+
+								<button class="btn" type="reset">
+									<i class="icon-undo bigger-110"></i>
+									{$Think.lang.RESET}
+								</button>
+							</div>
+						</div>
+					</form>
+
+				</div>
+				<!-- PAGE CONTENT ENDS -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<include file="Public:scripts"/>
+<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+<script>
+	var croppicContainerPreloadOptions = {
+		uploadUrl:"{:U('staff/saveimg')}",
+		cropUrl:"{:U('staff/cropimg')}",
+		customUploadButtonId:'cropContainerHeaderButton',
+		//loadPicture:"{$Think.const.SMALL_AVATARSURL}default.gif",
+		modal:false,
+		processInline:true,
+		enableMousescroll:true,
+		loaderHtml:'<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> ',
+		onBeforeImgUpload: function(){ console.log('onBeforeImgUpload') },
+		onAfterImgUpload: function(){ console.log('onAfterImgUpload') },
+		onImgDrag: function(){ console.log('onImgDrag') },
+		onImgZoom: function(){ console.log('onImgZoom') },
+		onBeforeImgCrop: function(){ console.log('onBeforeImgCrop') },
+		onAfterImgCrop:function(){ console.log('onAfterImgCrop') },
+		onReset:function(){ console.log('onReset') },
+		onError:function(errormessage){ console.log('onError:'+errormessage) }
+	};
+	var cropContainerPreload = new Croppic('cropContainerPreload', croppicContainerPreloadOptions);
+</script>
+<script>
+	jQuery(function($) {
+		$(".datepicker").datepicker({
+			changeYear: true,
+			defaultDate: "1992-05-11",
+			maxDate: "2000-12-31",
+			minDate: "1949-10-01",
+			showMonthAfterYear:true,
+			changeMonth: true,
+			monthNamesShort: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+			dateFormat: "yy-mm-dd"
+		});
+	});
+
+	function add_userinfo(){
+		checkpower();
+		checkjointime();
+		var bootstrapValidator = $("#user-form").data('bootstrapValidator');
+		bootstrapValidator.validate();
+		if(bootstrapValidator.isValid()){
+			bootbox.confirm('你确定要提交吗?', function (result) {
+				if (result) {
+					var data = $('#user-form').serialize();
+					$.ajax({
+						url: "{:U('staff/add_save')}",
+						type: 'post',
+						data: data,
+						success: function (res) {
+							showdialogs(res);
+						}
+					});
+				}
+			});
+		}else{
+			return false;
+		}
+	}
+
+	function showdialogs(res){
+		if(res == 1 ){
+			bootbox.alert({
+				buttons: {
+					ok: {
+						label: 'OK',
+						className: 'btn-default'
+					}
+				},
+				message: '恭喜你，你又多了一个好同事',
+				title: "提交成功",
+				callback: function(){
+					window.location.href="{:U('staff/look')}";
+				}
+			});
+		}else{
+			bootbox.alert({
+				buttons: {
+					ok: {
+						label: 'OK',
+						className: 'btn-default'
+					}
+				},
+				message: '看来你和你的新同事无缘了，呜呜呜',
+				title: "提交失败了",
+				callback: function(){
+					window.location.reload();
+				}
+			});
+		}
+	}
+
+
+	$('#user-form')
+			.bootstrapValidator({
+				message: '请输入有效的值',
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					invalid: 'glyphicon glyphicon-remove',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+				fields: {
+					name: {
+						message: '用户名无效',
+						validators: {
+							notEmpty: {
+								message: '用户名不能为空'
+							},
+							stringLength: {
+								min: 2,
+								max: 4,
+								message: '用户名长度为2~4个字符'
+							}
+						}
+					},
+					code: {
+						message: '编号无效',
+						validators: {
+							notEmpty: {
+								message: '编号不能为空'
+							},
+							stringLength: {
+								min: 4,
+								max: 4,
+								message: '编号长度为4'
+							},
+							regexp: {
+								regexp: /^[A-Z]{2}\d{2}$/,
+								message: '请输入有效的编号'
+							},
+							remote: {
+								//ajax验证。server result:{"valid",true or false} 向服务发送当前input name值，获得一个json数据。例表示正确：{"valid",true}
+								url: "{:U('staff/checkcode')}",
+								message: '编号已存在',//提示消息
+								delay :  2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+								type: 'POST'
+							}
+						}
+					},
+					idcard: {
+						validators: {
+							notEmpty: {
+								message: '身份证号不能为空'
+							},
+							regexp: {
+								regexp: /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/,
+								message: '身份证号格式不正确'
+							},
+							remote: {
+								url: "{:U('register/checkidcard')}",
+								message: '身份证号已存在',
+								delay: 2000,
+								type: 'POST'
+							}
+						}
+					},
+					email: {
+						validators: {
+							notEmpty: {
+								message: '邮箱不能为空'
+							},
+							regexp: {
+								regexp: /^([a-zA-Z])[a-zA-Z]+/,
+								message: '邮箱格式不正确'
+							},
+							remote: {
+								url: "{:U('staff/checkemail')}",
+								message: '邮箱已存在',
+								delay :  2000,
+								type: 'POST'
+							}
+						}
+					},
+					phone: {
+						validators: {
+							notEmpty: {
+								message: '手机号不能为空'
+							},
+							regexp: {
+								regexp: /^1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}$/,
+								message: '手机号格式不正确'
+							},
+							remote: {
+								url: "{:U('staff/checkphone')}",
+								message: "手机号已经存在",
+								delay: 2000,
+								type: 'POST'
+							}
+						}
+					},
+					/*time: {
+						validators: {
+							notEmpty: {
+								message: '入职时间不能为空'
+							},
+							regexp: {
+								regexp: /^\d{4}-\d{2}-\d{2}$/,
+								message: '请输入有效的日期'
+							}
+						}
+					},*/
+
+					depart: {
+						validators: {
+							notEmpty: {
+								message: '部门不能为空'
+							}
+						}
+					},
+					group: {
+						validators: {
+							notEmpty: {
+								message: '小组不能为空'
+							}
+						}
+					},
+					status: {
+						validators: {
+							notEmpty: {
+								message: '员工工作状态不能为空'
+							}
+						}
+					}
+				}
+			});
+
+	$('[data-rel=popover]').popover({container:'body'});// 划过显示帮助
+
+	function checkjointime(){
+		var jointime = $("input[name=time]");
+
+		if(jointime.val() == ''){
+			if($("#tishi").text() == ''){
+				$("#tishi").text("入职时间不能为空")
+			}
+		}
+	}
+
+</script>
+
+<include file="Public:footer"/>

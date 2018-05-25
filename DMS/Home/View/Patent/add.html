@@ -1,0 +1,312 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+            </li>
+
+            <li class="active">添加专利</li>
+        </ul><!-- .breadcrumb -->
+
+        <!--<div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div>-->
+        <!-- #nav-search -->
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                专利管理
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    {$Think.lang.ADD}
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+        <div class="row" >
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="btn-toolbar noprint">
+
+                    <div class="btn-group">
+                        <a href="JavaScript:history.back(-1)" class="btn btn-info" id="" title="返回"><i class="icon-reply icon-2x icon-only"></i></a>
+                    </div>
+
+                </div>
+                <form id="form1" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label no-padding-right" for="username"> 申请人 </label>
+
+                        <div class="col-xs-3">
+                            <div class="input-group">
+
+                                <select class="form-control" id="username" name="username">
+                                    <option value="">&nbsp;==请选择==&nbsp;</option>
+                                    <volist name="user" id="vol">
+                                        <option value="{$vol.id}">{$vol.name}({$vol.email})</option>
+                                    </volist>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label no-padding-right">专利{:L('STATUS')}</label>
+                        <div class="col-xs-3">
+
+                            <select name="category" id="category">
+                                <option value="">--------</option>
+                                <volist name="arr" id="vol">
+                                    <option value="category{$vol.id}">{$vol.name}</option>
+                                </volist>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label no-padding-right" for="name"> 专利名 </label>
+
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <input type="text" id="name" class="col-xs-12" name="name"/>
+                                <span class="input-group-addon">
+                                    <i class="icon-file-alt"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label no-padding-right" for="tag"> {:L('TAG')} </label>
+
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <input type="text" id="tag" class="col-xs-12" name="tag"/>
+                                <span class="input-group-addon">
+                                    <i class="icon-tags"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="help-button" data-rel="popover" data-trigger="hover" data-placement="right" data-content="标签之间请用英文半角逗号分隔." title="注意">?</span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label no-padding-right" for="starttime"> 申请日期 </label>
+
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <input type="text" id="starttime"  class="datepicker col-xs-12" name="starttime"  data-date-format="yyyy-mm-dd" readonly="readonly"/>
+                                <span class="input-group-addon">
+                                    <i class="icon-calendar"></i>
+                                </span>
+                            </div>
+                            <span id="tishi" class="red"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label no-padding-right" for="id-input-file-2"> 文件 </label>
+
+                        <div class="col-xs-3">
+                            <input type="file" name="file" id="id-input-file-2" onchange="fileChange(this)" />
+
+                            <span class="light-grey">请上传该专利相关的文件,文件格式只支持zip、rar</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label no-padding-right" for="remarks"> {:L('REMARKS')} </label>
+
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <textarea id="remarks" name="remarks" maxlength="50" class="autosize-transition form-control col-xs-12" style="margin: 0; width: 250px; height: 100px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix form-group">
+                        <div class="col-md-offset-3 col-xs-9">
+                            <div class="col-xs-2">
+                                <button id="patent-btn" type="button" class="btn btn-info">提交</button>
+
+                            </div>
+
+                            <button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                {$Think.lang.RESET}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="hr hr-24"></div>
+
+                </form>
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<include file="Public:scripts"/>
+<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+
+<script>
+    jQuery(function($) {
+        $(".datepicker").datepicker({
+            changeYear: true,
+            changeMonth: true,
+            maxDate: "today+7",
+            minDate: "2014-01-01",
+            showMonthAfterYear:true,
+            monthNamesShort: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+            dateFormat: "yy-mm-dd"
+        });
+
+        $('#id-input-file-2').ace_file_input({
+            no_file:'No File ...',
+            btn_choose:'Choose',
+            btn_change:'Change',
+            droppable:false,
+            onchange:null,
+            icon_remove: "",
+            thumbnail:true, //| true | large
+            whitelist:'zip|rar|tar.gz',
+            blacklist:'exe|php|gif|png|jpg|jpeg',
+            //onchange:''
+            //
+        });
+
+        $('#form1')
+                .bootstrapValidator({
+                    message: '请输入有效的值',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        username: {
+                            message: '无效',
+                            validators: {
+                                notEmpty: {
+                                    message: '申请人不能为空'
+                                }
+                            }
+                        },
+                        category: {
+                            validators: {
+                                notEmpty: {
+                                    message: "类型能为空"
+                                }
+                            }
+                        },
+                        remarks: {
+                            validators: {
+                                stringLength: {
+                                    max: 50,
+                                    message: '备注长度不能超过50个字符'
+                                }
+                            }
+                        }
+                    }
+                });
+
+        $("#patent-btn").click(function(){
+            checkpower();
+
+            var bootstrapValidator = $("#form1").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            checktime(); //检测申请时间是否为空
+            if(bootstrapValidator.isValid()){
+                var data = new FormData(document.getElementById('form1'));
+                bootbox.confirm('你确定要提交吗?', function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "{:U('patent/add_save')}",
+                            type: "post",
+                            dataType: "json",
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            success: function (res){
+                                showdialogs(res);
+                            }
+
+                        });
+                    }
+                });
+            }
+        });
+
+    });
+    function showdialogs(res){
+        console.log(res);
+        if(eval(res).code == '200' ){
+            bootbox.alert({
+                buttons: {
+                    ok: {
+                        label: 'OK',
+                        className: 'btn-default'
+                    }
+                },
+                message: '恭喜你，添加成功',
+                title: "提交成功",
+                callback: function(){
+                    window.location.href="{:U('patent/look')}";
+                }
+            });
+        }else{
+            bootbox.alert({
+                buttons: {
+                    ok: {
+                        label: 'OK',
+                        className: 'btn-default'
+                    }
+                },
+                message: '请上传文件格式为zip、rar的文件',
+                title: "添加失败",
+                callback: function(){
+                    window.location.reload();
+                }
+            });
+        }
+    }
+    $('[data-rel=popover]').popover({container:'body'});// 划过显示帮助
+
+    function checktime(){
+        var starttime = $("input[name=starttime]");
+
+        if(starttime.val() == ''){
+            if($("#tishi").text() == ''){
+                $("#tishi").text("时间不能为空")
+            }
+        }
+    }
+</script>
+
+<include file="Public:footer"/>

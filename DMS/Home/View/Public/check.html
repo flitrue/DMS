@@ -1,0 +1,12 @@
+<script>
+    var power = "{$Think.session.power}";
+    function checkpower(){
+        if(power.trim() == "0"){
+            alert("您不是管理员");
+            exit;
+        }
+    }
+    if(power.trim() == "0"){
+        $(".needhidden").remove();
+    }
+</script>

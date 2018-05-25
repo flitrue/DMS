@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>省市联动</title>
+</head>
+<body>
+
+<select id="pro" onchange="changecity()">
+    <option>==请选择省==</option>
+    <option>北京市</option>
+    <option>河南省</option>
+    <option>山东省</option>
+    <option>上海市</option>
+</select>
+省
+
+<select id="city"><option>==请选择市==</option></select>
+市
+
+<form action="{:U('test/upload')}" enctype="multipart/form-data" method="post" >
+    <input type="text" name="name" value=""/>
+    <input type="file" name="photo" />
+    <input type="submit" value=" 提交 " >
+</form>
+
+
+
+<script type="text/javascript">   
+function changecity(){    
+    var pro = $("#pro"); 
+    var provalue = pro.find("option:selected").text();    
+    var city = $("#city");    city.empty();
+    //清空城市下拉框    
+    switch(provalue){
+        case "北京市": 
+            city.append($("<option>朝阳区</option>")); 
+            city.append($("<option>海淀区</option>"));      
+            city.append($("<option>西城区</option>")); 
+            city.append($("<option>房山区</option>"));      
+            city.append($("<option>东城区</option>"));      
+            break; 
+        case "河南省":
+            city.append($("<option>郑州市</option>"));      
+            city.append($("<option>洛阳市</option>")); 
+            city.append($("<option>新乡市</option>"));      
+            city.append($("<option>开封市</option>")); 
+            city.append($("<option>商丘市</option>"));      
+            city.append($("<option>安阳市</option>"));      
+            break;
+        case "山东省":
+            city.append($("<option>聊城市</option>"));
+            city.append($("<option>济南市</option>"));
+            city.append($("<option>青岛市</option>"));
+            city.append($("<option>烟台市</option>"));
+            city.append($("<option>廊坊市</option>"));
+            break;
+        case "上海市":
+            city.append($("<option>浦东新区</option>")); 
+            city.append($("<option>虹口区</option>"));
+            city.append($("<option>上海市</option>"));
+            break;
+
+    void function(e,t){
+        for(var n=t.getElementsByTagName("img"),a=+new Date,i=[],
+                                   o=function(){
+        this.removeEventListener&&this.removeEventListener("load",o,!1),
+                i.push({img:this,time:+new Date})},
+                    s=0;s< n.length;s++)!
+                function(){
+                    var e=n[s];
+                    e.addEventListener?!e.complete&&e.addEventListener("load",o,!1):e.attachEvent&&e.attachEvent("onreadystatechange",
+            function(){
+                "complete"==e.readyState&&o.call(e,o)
+            })
+        }();
+        alog("speed.set",{fsItems:i,fs:a})}
+        (window,document);
+    }       
+}
+    </script>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+<script>
+    $("input[type='submit']").click(function(){
+        var a = $("input[name='name']").attr("value");
+        alert(a);
+    });
+
+</script>
+</body>
+</html>
+

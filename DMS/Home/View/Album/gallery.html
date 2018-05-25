@@ -1,0 +1,504 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+<!-- 相册划过显示遮罩效果样式 -->
+<link rel="stylesheet" href="{$Think.const.CSS_URL}style.default.css" type="text/css" />
+
+<div class="main-content">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+			try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+		</script>
+
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home home-icon"></i>
+				<a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+			</li>
+
+			<li class="active"><a href="{:U('album/gallery')}">媒体管理</a></li>
+		</ul><!-- .breadcrumb -->
+
+		<!--<div class="nav-search" id="nav-search">
+			<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+			</form>
+		</div>-->
+		<!-- #nav-search -->
+	</div>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				相册
+				<small>
+					<i class="icon-double-angle-right"></i>
+					相册列表
+				</small>
+			</h1>
+		</div><!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<a href="#responsive" class="btn btn-success" title="添加相册" data-toggle="modal"><i class="icon-plus icon-2x icon-only"></i></a>
+					</div>
+
+					<!--<div class="btn-group">
+						<button class="btn btn-danger" id="deleteselected" title="删除相册"><i class="icon-trash icon-2x icon-only"></i></button>
+					</div>-->
+
+				</div>
+				<div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×
+								</button>
+								<h4 class="modal-title" id="myModalLabel">
+									添加相册
+								</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-xs-12">
+										<form id="albumform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+											<div class="form-group">
+												<label class="col-xs-3 control-label no-padding-right" for="albumname"> 相册名 </label>
+
+												<div class="col-xs-5">
+													<div class="input-group">
+														<input type="text" id="albumname" name="name"/>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-xs-3 control-label no-padding-right" for="mes"> 描述 </label>
+
+												<div class="col-xs-3">
+													<div class="input-group">
+														<textarea id="mes" name="mes" class="autosize-transition form-control col-xs-12" style="margin: 0px; width: 201px; height: 104px;"></textarea>
+													</div>
+												</div>
+											</div>
+											<label class="col-xs-3 control-label no-padding-right" for="mes"> 封皮图片 </label>
+											<div class="col-xs-6">
+												<ul id="myTab" class="nav nav-tabs">
+													<li class="active"><a href="#ios" data-toggle="tab">在线照片</a></li>
+													<li>
+														<a href="#home" data-toggle="tab">
+															上传照片
+														</a>
+													</li>
+
+												</ul>
+												<div id="myTabContent" class="tab-content">
+													<div class="tab-pane fade in active" id="ios">
+														<input type="text"  name="onlineurl" style="width:200px" placeholder="http://**.com/logo.png"/>
+
+													</div>
+													<div class="tab-pane fade" id="home">
+														<div class="form-group" id="photo">
+
+															1、图片大小不能超过2M<br>
+															2、支持格式：.jpg .gif .png jpeg。
+															<ul class="ace-thumbnails" style="border: 0 ">
+																<li style="border: 0;padding: 15px  ">
+																	<input type="file" name="photo"/>
+																</li>
+															</ul>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+										data-dismiss="modal">关闭
+								</button>
+								<button type="button" class="btn btn-primary" onclick="upload();">
+									提交
+								</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div>
+				<div class="modal fade" id="editalbum" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×
+								</button>
+								<h4 class="modal-title">
+									编辑相册
+								</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-xs-12">
+										<form id="editalbumform" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+											<div class="form-group">
+												<label class="col-xs-3 control-label no-padding-right" for="editalbumname"> 相册名 </label>
+
+												<div class="col-xs-5">
+													<div class="input-group">
+														<input type="text" id="editalbumid" name="aid" hidden/>
+														<input type="text" id="editalbumname" name="name"/>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-xs-3 control-label no-padding-right"> 描述 </label>
+
+												<div class="col-xs-3">
+													<div class="input-group">
+														<textarea id="editalbummes" name="mes" class="autosize-transition form-control col-xs-12" style="margin: 0px; width: 201px; height: 104px;"></textarea>
+													</div>
+												</div>
+											</div>
+											<label class="col-xs-3 control-label no-padding-right"> 封皮图片 </label>
+											<div class="col-xs-6">
+												<ul  class="nav nav-tabs">
+													<li class="active"><a href="#onlineurl" data-toggle="tab">在线照片</a></li>
+													<li>
+														<a href="#uploadphoto" data-toggle="tab">
+															上传照片
+														</a>
+													</li>
+
+												</ul>
+												<div class="tab-content">
+													<div class="tab-pane fade in active" id="onlineurl">
+														<input type="text"  name="onlineurl" style="width:200px" placeholder="http://**.com/logo.png"/>
+
+													</div>
+													<div class="tab-pane fade" id="uploadphoto">
+														<div class="form-group" id="prephoto">
+
+															1、图片大小不能超过2M<br>
+															2、支持格式：.jpg .gif .png jpeg。
+															<ul class="ace-thumbnails" style="border: 0 ">
+																<li style="border: 0;padding: 15px  ">
+																	<img id="preimg" src="" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" style="position:absolute;z-index:2" height="150px" width="160.3px" onclick="$('#editinput').trigger('click');" />
+																	<input id="editinput" type="file" name="photo" style="position:absolute;z-index:-1;"/>
+																</li>
+															</ul>
+
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</form>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+										data-dismiss="modal">关闭
+								</button>
+								<button type="button" class="btn btn-primary" onclick="update();">
+									提交
+								</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div>
+				<div class="prodwrapper">
+
+					<ul class="prodlist">
+						<volist name="arr" id="vol">
+							<li class="one_third">
+									<div class="thumb"><img src="{$vol.photo}" onerror="javascript:this.src='{$Think.const.IMAGE_URL}nopicture.jpg'" alt="" /></div>
+
+									<div class="content">
+										<div class="contentinner">
+											<div>
+												<span class="price">{$vol.createtime}</span>
+												<a href="{:U('album/photo')}&aid={$vol.id}" class="title">{$vol.name}</a>
+											</div>
+											<div>By: <a href="{:U('staff/detail')}&uid={$vol.uid}">{$vol.creater}</a>
+												<span class="pull-right">相片数:{$vol.photocount|default='0'}</span>
+											</div>
+											<p class="desc"><a href="{:U('album/photo')}&aid={$vol.id}"> {$vol.mes|msubstr=0,60} </a></p>
+											<div>
+												<h3>
+													<a href="#editalbum" data-toggle="modal"><i class="icon-edit" onclick="updateeditinput('{$vol.id}','{$vol.name}','{$vol.mes}','{$vol.photo}')" title="编辑"></i></a>
+													<i style="color:red;" class="icon-remove" onclick="del('{$vol.id}')" title="删除"></i>
+												</h3>
+											</div>
+										</div><!--contentinner-->
+
+									</div><!--content-->
+							</li>
+						</volist>
+
+					</ul>
+
+				</div><!--prodwrapper-->
+
+				<!-- PAGE CONTENT ENDS -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+<script src="{$Think.const.JS_URL}jquery-1.7.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+
+<script type="text/javascript">
+	if("ontouchend" in document) document.write("<script src='{$Think.const.JS_URL}jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+
+<!-- inline scripts related to this page -->
+
+<!-- page specific plugin scripts -->
+<script type="text/javascript" src="{$Think.const.JS_URL}jquery.cookie.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}general.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}productlist.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="{$Think.const.JS_URL}bootbox.min.js"></script>
+
+<!-- ace scripts -->
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+<include file="Public:check"/>
+
+<script type="text/javascript">
+
+	jQuery(function ($){
+
+		$('#photo').find('input[type=file]').ace_file_input({
+			style:'well',
+			btn_choose:'Change photo',
+			btn_change:null,
+			no_icon:'icon-picture',
+			thumbnail:'large',
+			droppable:true,
+			before_change: function(files) {
+				var file = files[0];
+				if(typeof file === "string") {
+					//files is just a file name here (in browsers that don't support FileReader API)
+					if(! (/\.(jpe?g|png|gif)$/i).test(file) ) return false;
+				} else{
+					//file is a File object
+					var type = $.trim(file.type);
+					if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
+							|| ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )//for android default browser!
+					) return false;
+
+					if( file.size > 5000000 ) {
+						//~5Mb
+						return false;
+					}
+				}
+
+				return true;
+			}
+		});
+
+		$('#prephoto').find('input[type=file]').ace_file_input({
+			style:'well',
+			btn_choose:'Change photo',
+			btn_change:null,
+			no_icon:'icon-picture',
+			thumbnail:'large',
+			droppable:true,
+			before_change: function(files) {
+				var file = files[0];
+				if(typeof file === "string") {
+					//files is just a file name here (in browsers that don't support FileReader API)
+					if(! (/\.(jpe?g|png|gif)$/i).test(file) ) return false;
+				} else{
+					//file is a File object
+					var type = $.trim(file.type);
+					if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
+							|| ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )//for android default browser!
+					) return false;
+
+					if( file.size > 5000000 ) {
+						//~5Mb
+						return false;
+					}
+				}
+
+				return true;
+			}
+		});
+		$("#editinput").on("change",function(){
+
+			$("#editinput").css("z-index","3");
+			$("#preimg").remove();
+
+		});
+		$('#albumform').bootstrapValidator({
+			message: '请输入有效的值',
+			feedbackIcons: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			fields: {
+				name: {
+					message: '相册名无效',
+					validators: {
+						notEmpty: {
+							message: '相册名不能为空'
+						},
+						stringLength: {
+							min: 2,
+							message: '相册名最小长度为2'
+						}
+					}
+				},
+				mes: {
+					message: '描述无效',
+					validators: {
+						notEmpty: {
+							message: '描述不能为空'
+						},
+						stringLength: {
+							min: 2,
+							max: 100,
+							message: '描述最长长度为100'
+						}
+					}
+				}
+			}
+		});
+
+		$('#editalbumform')
+				.bootstrapValidator({
+					message: '请输入有效的值',
+					feedbackIcons: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					fields: {
+						name: {
+							message: '相册名无效',
+							validators: {
+								notEmpty: {
+									message: '相册名不能为空'
+								},
+								stringLength: {
+									min: 2,
+									max: 20,
+									message: '相册名长度为2~20'
+								}
+							}
+						},
+						mes: {
+							message: '描述无效',
+							validators: {
+								notEmpty: {
+									message: '描述不能为空'
+								},
+								stringLength: {
+									min: 2,
+									max: 100,
+									message: '描述最长长度为100'
+								}
+							}
+						}
+					}
+				});
+
+	});
+
+	function upload(){
+		var formData = new FormData(document.getElementById("albumform"));
+		//var data = $("#albumform").serialize();;
+
+		$.ajax({
+			type: "post",
+			url: "{:U('album/add')}",
+			dataType: "json",
+			processData:false,
+			contentType:false,
+			data: formData,
+			success: function(data){
+				if(eval(data).code){
+					window.location.reload();
+				}else{
+					alert("添加失败");
+				}
+			}
+		});
+	}
+
+	function del(id){
+		bootbox.confirm("你确定要删除吗?",function(result){
+			if (result) {
+				$.ajax({
+					type: "get",
+					url: "{:U('album/del')}&id="+id,
+					success: function(data){
+						if(data){
+							var $copysuc = $("<div class='copy-tips'><div class='copy-tips-wrap'>删除成功</div></div>");
+							$("body").find(".copy-tips").remove().end().append($copysuc);
+							$(".copy-tips").fadeOut(3000);
+							window.location.reload();
+						}else{
+							var $copysuc = $("<div class='copy-tips'><div class='copy-tips-wrap'>删除失败</div></div>");
+							$("body").find(".copy-tips").remove().end().append($copysuc);
+							$(".copy-tips").fadeOut(3000);
+							window.location.reload();
+						}
+					}
+				});
+			}
+		});
+	}
+
+	function updateeditinput(id,name,mes,img){
+		$("#editalbumid").attr("value",id);
+		$("#editalbumname").attr("value",name);
+		$("#editalbummes").attr("value",mes);
+		$("#preimg").attr("src",img);
+	}
+
+	function update(){
+		var formData = new FormData(document.getElementById("editalbumform"));
+		//var data = $("#albumform").serialize();;
+
+		$.ajax({
+			type: "post",
+			url: "{:U('album/editphoto')}",
+			dataType: "json",
+			processData:false,
+			contentType:false,
+			data: formData,
+			success: function(data){
+
+				if(eval(data).code){
+					window.location.reload();
+				}else{
+					alert("编辑失败");
+				}
+			}
+		});
+	}
+
+</script>
+<include file="Public:footer"/>

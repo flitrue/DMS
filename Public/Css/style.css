@@ -1,0 +1,86 @@
+
+.echarts-layout .main-container:after {
+    display: none
+}
+
+.echarts-layout .main-content {
+    margin-left: 0;
+    min-height: 100%;
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+.echarts-layout label {
+    margin-bottom: 11px
+}
+
+.echarts-layout .widget-box {
+    visibility: hidden;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    border-bottom: 0;
+    box-shadow: none;
+    padding: 6px;
+    -moz-transform: scale(0,1) translate(-150px);
+    -webkit-transform: scale(0,1) translate(-150px);
+    -o-transform: scale(0,1) translate(-150px);
+    -ms-transform: scale(0,1) translate(-150px);
+    transform: scale(0,1) translate(-150px)
+}
+
+.echarts-layout .widget-box.visible {
+    visibility: visible;
+    -moz-transform: scale(1,1) translate(0);
+    -webkit-transform: scale(1,1) translate(0);
+    -o-transform: scale(1,1) translate(0);
+    -ms-transform: scale(1,1) translate(0);
+    transform: scale(1,1) translate(0);
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    -o-transition: none;
+    -webkit-transition: none
+}
+
+.echarts-layout .widget-box .widget-main {
+    padding: 16px 36px 36px;
+    background: #f7f7f7
+}
+
+.echarts-layout .widget-box .widget-main form {
+    margin: 0
+}
+
+.echarts-layout .widget-box .widget-body .toolbar>div>a {
+    font-size: 15px;
+    font-weight: 400;
+    text-shadow: 1px 0 1px rgba(0,0,0,0.25)
+}
+
+@media only screen and (max-width:480px) {
+    .echarts-layout .widget-box .widget-main {
+        padding: 16px
+    }
+}
+
+@media only screen and (max-width:480px) {
+    .login-container {
+        width: 98%
+    }
+
+    .echarts-layout .widget-box {
+        padding: 0
+    }
+
+}
+
+@media only screen and (max-width:767px) {
+    .echarts-layout .widget-box.visible {
+        -webkit-transition: none;
+        transition: none
+    }
+}
+
+.echarts-layout .widget-main {
+    padding-bottom: 16px
+}

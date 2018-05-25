@@ -1,0 +1,122 @@
+
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="/">{$Think.lang.HOME}</a>
+            </li>
+
+            <li class="active">设备管理</li>
+        </ul>
+
+        <!--<div class="nav-search" id="nav-search">
+            <form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+            </form>
+        </div>-->
+        <!-- #nav-search -->
+    </div><!-- .breadcrumb -->
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                发票
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    查看
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="btn-toolbar noprint">
+
+                    <div class="btn-group">
+                        <a href="JavaScript:history.back(-1)" class="btn btn-info" id="" title="返回"><i class="icon-reply icon-2x icon-only"></i></a>
+                    </div>
+
+                </div>
+                <div class="space-2"></div>
+                {$invoice}
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+
+</div><!-- /.main-container-inner -->
+
+
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='{$Think.const.JS_URL}jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+
+
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="{$Think.const.JS_URL}jquery.colorbox-min.js"></script>
+
+
+<!-- ace scripts -->
+
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+<include file="Public:check"/>
+<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+    var colorbox_params = {
+        reposition:true,
+        scalePhotos:true,
+        scrolling:false,
+        previous:'<i class="icon-arrow-left"></i>',
+        next:'<i class="icon-arrow-right"></i>',
+        close:'&times;',
+        current:'{current} of {total}',
+        maxWidth:'100%',
+        maxHeight:'100%',
+        onOpen:function(){
+            document.body.style.overflow = 'hidden';
+        },
+        onClosed:function(){
+            document.body.style.overflow = 'auto';
+        },
+        onComplete:function(){
+            $.colorbox.resize();
+        }
+    };
+    $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+    $("#cboxLoadingGraphic").append("<i class='icon-spinner orange'></i>");
+
+</script>
+
+<include file="Public:footer"/>

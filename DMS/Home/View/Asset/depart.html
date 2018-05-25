@@ -1,0 +1,217 @@
+<include file="Public:header"/>
+<include file="Public:lefter"/>
+<include file="Public:setting"/>
+
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-home home-icon"></i>
+                <a href="{:U('index/index')}">{$Think.lang.HOME}</a>
+            </li>
+
+            <li class="active">资产管理</li>
+        </ul><!-- .breadcrumb -->
+
+        <!--<div class="nav-search" id="nav-search">
+            <form class="form-search">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                    <i class="icon-search nav-search-icon"></i>
+                </span>
+            </form>
+        </div>-->
+        <!-- #nav-search -->
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                {:L('DEPARTASSET')}
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    {:L('LOOK')}
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="col-sm-1"></div>
+
+                <div class="col-sm-5">
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-flat">
+                            <h4 class="lighter">
+                                <i class="icon-star orange"></i>
+                                资产表
+                            </h4>
+
+                            <div class="widget-toolbar">
+                                <a href="#" data-action="collapse">
+                                    <i class="icon-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main no-padding">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="thin-border-bottom">
+                                    <tr>
+                                        <th>
+                                            <i class="icon-caret-right blue"></i>
+                                            部门名称
+                                        </th>
+                                        <th>
+                                            <i class="icon-caret-right blue"></i>
+                                            设备数
+                                        </th>
+
+                                        <th>
+                                            <i class="icon-caret-right blue"></i>
+                                            价格
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <volist name="arr" id="vol">
+                                        <tr>
+                                            <td>{$vol.name}</td>
+                                            <td>{$vol.count}</td>
+
+                                            <td>
+                                                <b class="green">{$vol.price}</b>
+                                                <small>
+                                                    <i class="red">RMB</i>
+                                                </small>
+                                            </td>
+                                        </tr>
+                                    </volist>
+
+
+                                    </tbody>
+                                </table>
+                            </div><!-- /widget-main -->
+                        </div><!-- /widget-body -->
+                    </div><!-- /widget-box -->
+                </div>
+
+
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-flat widget-header-small">
+                            <h5>
+                                <i class="icon-signal"></i>
+                                价目图
+                            </h5>
+
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div id="chartsmain" style="height:200px;"></div>
+
+                            </div><!-- /widget-main -->
+                        </div><!-- /widget-body -->
+                    </div><!-- /widget-box -->
+                </div>
+
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+        <div class="hr hr32 hr-dotted"></div>
+    </div><!-- /.page-content -->
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="{$Think.const.JS_URL}jquery-2.0.3.min.js"></script>
+
+<!-- <![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='{$Think.const.JS_URL}jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+
+<script src="{$Think.const.JS_URL}bootstrap.min.js"></script>
+<script src="{$Think.const.JS_URL}typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<script src="{$Think.const.JS_URL}echarts.min.js"></script>
+
+<!-- ace scripts -->
+
+<script src="{$Think.const.JS_URL}ace-elements.min.js"></script>
+<script src="{$Think.const.JS_URL}ace.min.js"></script>
+<include file="Public:check"/>
+
+<!-- inline scripts related to this page -->
+
+<script>
+    var piedepartdata;
+    var departassetchart = echarts.init(document.getElementById('chartsmain'));
+    $.ajax({
+        type: "GET",
+        url: "{:U('asset/pieDepartData')}",
+        async: false,
+        dataType: "json",
+        success: function(data){
+            piedepartdata = data;
+        }
+    });
+    var dat;
+    $.ajax({
+        type: "GET",
+        url: "{:U('asset/pieData')}",
+        async: false,
+        dataType: "json",
+        success: function(data){
+            dat = data;
+        }
+    });
+
+    var option1 = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{b}: {c} ({d}%)"
+        },
+        calculable : true,
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data:dat
+        },
+        series : [
+            {
+                name:'部门资产',
+                type:'pie',
+                radius: ['40%', '60%'],
+                center: ['60%', '50%'],
+                data:piedepartdata
+            }
+        ]
+
+    };// 饼状图
+    departassetchart.setOption(option1);
+
+</script>
+
+<include file="Pulbic:footer"/>
